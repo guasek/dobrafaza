@@ -27,12 +27,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = "chef/roles"
     chef.data_bags_path = "chef/data_bags"
 #    chef.log_level = :debug
-
-    chef.add_recipe "apt"  
-    chef.add_recipe "nodejs::install_from_source"
-    chef.add_recipe "mongodb"
-    chef.add_recipe "grunt::install_grunt_prereq"
-    chef.add_recipe "grunt::install_grunt_cli"
-    chef.add_recipe "dobrafaza_custom"
+    chef.add_role "dobrafaza-single-node"
   end
 end
