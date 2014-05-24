@@ -36,7 +36,14 @@ deploy_branch "/home/dobrafaza/deploy" do
   revision "development"
 end
 
-execute "build" do
+execute "build npm" do
   cwd "/home/dobrafaza/deploy/current"
   command "npm install --production"
+end
+
+directory /home/dobrafaza/deploy/app/bower_components do
+  owner "dobrafaza"
+  group "root"
+  mode 00755
+  action :create
 end

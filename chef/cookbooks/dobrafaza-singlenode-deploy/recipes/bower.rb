@@ -3,9 +3,3 @@ execute "install Bower npm package" do
   command "npm install -g bower"
   not_if "npm ls 2> /dev/null | grep 'bower'"
 end
-
-execute "bower install --production --no-color" do
-  cwd "/home/dobrafaza/deploy/current"
-  user "dobrafaza"
-  command "bower install --production --no-color"
-end
