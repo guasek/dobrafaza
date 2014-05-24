@@ -1,5 +1,5 @@
 execute "build bower" do
-  user "dobrafaza"
   cwd "/home/dobrafaza/deploy/current"
-  command "bower install --production"
+  command "bower cache clean --allow-root"
+  command "bower install --production --allow-root"
 end
