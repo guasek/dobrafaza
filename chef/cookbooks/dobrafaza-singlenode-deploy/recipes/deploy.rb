@@ -28,10 +28,15 @@ deploy_revision "/home/dobrafaza/deploy" do
   repo "git@bitbucket.org:guasek/dobrafaza.git"
   user "dobrafaza"
   migrate false
-  symlink_before_migrate "package.json" => "package.json"
+  symlink_before_migrate "Vagrantfile" => "Vagrantfile"
   symlinks nil
   deploy_to "/home/dobrafaza/deploy"
   action :deploy
   ssh_wrapper "/home/dobrafaza/private_code/wrap-ssh4git.sh"
   revision "development"
+end
+
+execute "build" do
+  cwd "/home/dobrafaza/deploy/current"
+  command "npm install"
 end
