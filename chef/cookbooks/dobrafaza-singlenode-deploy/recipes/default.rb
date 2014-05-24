@@ -9,3 +9,5 @@
 include_recipe "dobrafaza-singlenode-deploy::users"
 include_recipe "dobrafaza-singlenode-deploy::bower"
 include_recipe "dobrafaza-singlenode-deploy::deploy"
+include_recipe "dobrafaza-singlenode-deploy::build_npm"
+include_recipe "dobrafaza-singlenode-deploy::build_bower"

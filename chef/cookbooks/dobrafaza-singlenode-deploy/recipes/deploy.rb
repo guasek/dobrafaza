@@ -38,19 +38,10 @@ end
 
 directory "/home/dobrafaza/deploy/current/app/bower_components" do
   owner "dobrafaza"
+
   group "root"
   mode 00777
   action :create
 end
 
-execute "build packages" do
-  user "dobrafaza"
-  cwd "/home/dobrafaza/deploy/current"
-  command "bower install --production"
-end
 
-execute "build packages" do
-  user "dobrafaza"
-  cwd "/home/dobrafaza/deploy/current"
-  command "npm install --production"
-end
