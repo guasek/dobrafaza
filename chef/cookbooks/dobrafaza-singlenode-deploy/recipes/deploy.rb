@@ -41,7 +41,7 @@ execute "build npm" do
   command "npm install --production"
 end
 
-directory "/home/dobrafaza/deploy/app/bower_components" do
+directory "/home/dobrafaza/deploy/current/app/bower_components" do
   owner "dobrafaza"
   group "root"
   mode 00755
