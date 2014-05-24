@@ -24,7 +24,7 @@ directory "/home/dobrafaza/.ssh" do
   recursive true
 end
 
-deploy_revision "/home/dobrafaza/deploy" do
+deploy_branch "/home/dobrafaza/deploy" do
   repo "git@bitbucket.org:guasek/dobrafaza.git"
   user "dobrafaza"
   migrate false
@@ -38,5 +38,5 @@ end
 
 execute "build" do
   cwd "/home/dobrafaza/deploy/current"
-  command "npm install"
+  command "npm install --production"
 end
