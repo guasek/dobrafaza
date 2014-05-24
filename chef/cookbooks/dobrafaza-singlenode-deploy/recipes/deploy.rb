@@ -46,6 +46,11 @@ end
 execute "build packages" do
   user "dobrafaza"
   cwd "/home/dobrafaza/deploy/current"
-  command "npm install --production"
   command "bower install --production"
+end
+
+execute "build packages" do
+  user "dobrafaza"
+  cwd "/home/dobrafaza/deploy/current"
+  command "npm install --production"
 end
