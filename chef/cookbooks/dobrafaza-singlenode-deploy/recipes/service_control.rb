@@ -1,6 +1,8 @@
 template '/etc/init.d/dobrafaza' do
   source 'dobrafaza.conf.erb'
-  mode 0644
+  owner "dobrafaza"
+  group "root"
+  mode 0777
 end
 
 service 'dobrafaza' do
