@@ -4,11 +4,6 @@ template '/etc/init/dobrafaza.conf' do
 end
 
 service 'dobrafaza' do
-  action :enable
-  Chef::Provider::Service::Upstart
-end
-
-service 'dobrafaza' do
   action :stop
   Chef::Provider::Service::Upstart
 end
