@@ -1,6 +1,6 @@
-template '/etc/init/dobrafaza.conf' do
+template '/etc/init.d/dobrafaza' do
   source 'dobrafaza.conf.erb'
-  mode 0440
+  mode 0644
 end
 
 service 'dobrafaza' do
