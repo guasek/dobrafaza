@@ -38,7 +38,6 @@ end
 
 directory "/home/dobrafaza/deploy/current/app/bower_components" do
   owner "dobrafaza"
-
   group "root"
   mode 00777
   action :create

@@ -8,3 +8,4 @@ heroku
 dist
 .vagrant
 .idea
+.DS_Store
