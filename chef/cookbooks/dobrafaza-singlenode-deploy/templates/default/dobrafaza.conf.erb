@@ -1,10 +1,13 @@
-description 'Dobrafaza upstart script'
-author 'Paweł Głasek <guasek@gmail.com>'
+description "Dobrafaza upstart script"
+author "Paweł Głasek <guasek@gmail.com>"
 
-start on [2345]
+#start on [2345]
+start on started mountall
 
-stop on [06]
+#stop on [06]
+stop on shutdown
 
 respawn
+respawn limit 99 5
 
-exec /usr/local/bin/grunt --gruntfile /home/dobrafaza/deploy/current/Gruntfile.js serve:dist > /home/dobrafaza/deploy/current/log 2>&1
+exec /usr/local/bin/grunt --gruntfile /home/dobrafaza/deploy/current/Gruntfile.js serve:dist > /home/dobrafaza/deploy/current/log 2>&1 &
