@@ -33,7 +33,7 @@ deploy_branch "/home/dobrafaza/deploy" do
   deploy_to "/home/dobrafaza/deploy"
   action :deploy
   ssh_wrapper "/home/dobrafaza/private_code/wrap-ssh4git.sh"
-  revision "development"
+  revision "master"
 end
 
 directory "/home/dobrafaza/deploy/current/app/bower_components" do
