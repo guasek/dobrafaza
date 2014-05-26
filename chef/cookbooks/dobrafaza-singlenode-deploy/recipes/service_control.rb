@@ -1,16 +1,12 @@
-template '/etc/init.d/dobrafaza' do
+template '/etc/init/dobrafaza.conf' do
   source 'dobrafaza.conf.erb'
   owner "dobrafaza"
   group "root"
   mode 0777
 end
 
-service 'dobrafaza' do
-  action :stop
-  Chef::Provider::Service::Upstart
-end
-
-service 'dobrafaza' do
-  action :start
-  Chef::Provider::Service::Upstart
+execute "restart service" do
+  user "root"
+  command "initctl stop dobrafaza"
+  command "initctl start dobrafaza"
 end
