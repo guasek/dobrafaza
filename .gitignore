@@ -2,9 +2,10 @@ node_modules
 public
 .tmp
 .sass-cache
-app/bower_components
+app/bower_components/*
 heroku
 /views
 dist
 .vagrant
 .idea
+.DS_Store

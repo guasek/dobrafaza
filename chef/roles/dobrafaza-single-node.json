@@ -1,0 +1,13 @@
+{
+  "json_class": "Chef::Role",
+  "name": "dobrafaza-single-node",
+  "description": "Cała aplikacja na pojedynczym nodzie.",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[git]",
+    "recipe[nodejs::install_from_source]",
+    "recipe[mongodb]",
+    "recipe[grunt::install_grunt_prereq]",
+    "recipe[grunt::install_grunt_cli]"
+  ]
+}

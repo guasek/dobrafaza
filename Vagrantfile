@@ -4,8 +4,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = 'vagrant-debian-wheezy-64'
-  config.vm.box_url = 'https://dl.dropboxusercontent.com/s/cd583cuf0mbcix7/debian-wheezy-64-chef.box'
+  config.vm.box = 'ubuntu-trusty-14.04'
+  config.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
   config.vm.hostname = 'vagrant.dobrafaza.pl'
 
   config.vm.network :forwarded_port, guest: 9000, host: 9000
@@ -27,12 +27,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = "chef/roles"
     chef.data_bags_path = "chef/data_bags"
 #    chef.log_level = :debug
-
-    chef.add_recipe "apt"  
-    chef.add_recipe "nodejs::install_from_source"
-    chef.add_recipe "mongodb"
-    chef.add_recipe "grunt::install_grunt_prereq"
-    chef.add_recipe "grunt::install_grunt_cli"
-    chef.add_recipe "dobrafaza_custom"
+#    chef.add_role "dobrafaza-single-node"
   end
 end

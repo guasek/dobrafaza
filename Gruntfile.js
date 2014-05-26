@@ -261,7 +261,7 @@ module.exports = function (grunt) {
              '<%= yeoman.dist %>/views/{,*/}*.jade'],
       css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>/public']
+        assetsDirs: ['<%= yeoman.dist %>/public',  '<%= yeoman.dist %>/public/images' ]
       }
     },
 
@@ -463,7 +463,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['express:prod', 'express-keepalive']);
+      return grunt.task.run(['build', 'express:prod', 'express-keepalive']);
     }
 
     if (target === 'vagrant') {
@@ -528,7 +528,6 @@ module.exports = function (grunt) {
     'concat',
     'ngmin',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'rev',
