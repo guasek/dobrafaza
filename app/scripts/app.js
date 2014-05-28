@@ -15,6 +15,10 @@ angular.module('dobraFaza', [
         templateUrl: 'partials/video_player',
         controller: 'PlaybackController'
     })
+    .when('/janrodzyn', {
+        templateUrl: 'partials/admin',
+        controller: 'AdminController'
+    })
     .otherwise({
         redirectTo: '/'
     });
