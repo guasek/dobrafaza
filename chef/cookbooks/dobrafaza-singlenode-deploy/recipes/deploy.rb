@@ -1,4 +1,4 @@
-%w[ /home/dobrafaza /home/dobrafaza/private_code/ /home/dobrafaza/.ssh /home/dobrafaza/deploy ].each do |path|
+%w[ /home/dobrafaza /home/dobrafaza/private_code/ /home/dobrafaza/.ssh /home/dobrafaza/deploy /home/dobrafaza/shared/node_modules ].each do |path|
   directory path do
     owner "dobrafaza"
     group "root"
@@ -28,7 +28,7 @@ deploy_branch "/home/dobrafaza/deploy" do
   repo "git@bitbucket.org:guasek/dobrafaza.git"
   user "dobrafaza"
   migrate false
-  symlink_before_migrate "Vagrantfile" => "Vagrantfile"
+  symlink_before_migrate "node_modules" => "node_modules"
   symlinks nil
   deploy_to "/home/dobrafaza/deploy"
   action :deploy
