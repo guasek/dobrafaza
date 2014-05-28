@@ -2,8 +2,8 @@
 
 angular.module('dobraFaza')
   .controller('PlaybackController', ['$scope', '$window', 'videoPlayer', 'videoRepository', function ($scope, $window, videoPlayer, videoRepository) {
-    $window.onYouTubeIframeAPIReady = function () {
-        videoRepository.fetchAll().success(function(data) {
+    videoRepository.fetchAll().success(function(data) {
+        $window.onYouTubeIframeAPIReady = function () {
             var playList = PlayList.fromYoutubeIds(data.map(function (element) {
                 return element.videoId;
             }));
@@ -11,6 +11,6 @@ angular.module('dobraFaza')
             videoPlayer.shufflePlaylist();
             videoPlayer.startPlayback();
             $scope.videoPlayer = videoPlayer;
-        })
-    };
+        };
+    });
 }]);
