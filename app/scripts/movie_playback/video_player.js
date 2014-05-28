@@ -34,8 +34,15 @@ angular.module('videoPlayback', [])
             return $http.get('/api/videos');
         };
 
+        var store = function (video) {
+            var youtubeRegex = /^.*v=([^#\&\?]*).*/;
+            var youtubeId = youtubeRegex.exec(video.url, 'i');
+            $http.put('/api/videos', {videoId: youtubeId[1], vendorId: 1});
+        }
+
         return {
-            fetchAll: fetchAll
+            fetchAll: fetchAll,
+            store: store
         };
     }])
     .factory('videoPlayer', ['youtubePlayerApi', function(youtubeVideoPlayer) {

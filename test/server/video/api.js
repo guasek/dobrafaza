@@ -6,9 +6,9 @@ var should = require('should'),
     mongoose = require('mongoose'),
     Video = mongoose.model('Video');
 
-describe('GET /api/awesomeThings', function() {
+describe('Videos api', function() {
 
-    it('should respond with JSON array', function(done) {
+    it('GET /api/videos should respond with JSON array', function(done) {
         Video.remove({}, function(){});
         ['oukX49mJppM', 'Yz1rfDY-wlg', 'KRwDTj-Rcmk', 'ca1nQa2Feb0'].map(function(videoId) {
             var newVid = new Video();
@@ -23,6 +23,7 @@ describe('GET /api/awesomeThings', function() {
             .end(function(err, res) {
                 if (err) return done(err);
                 res.body.should.be.instanceof(Array);
+                res.body.length.should.equal(4);
                 done();
             });
     });
