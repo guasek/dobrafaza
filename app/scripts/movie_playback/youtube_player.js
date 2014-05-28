@@ -16,7 +16,6 @@ angular.module('youtube', ['ng']).run(function () {
 
         var onPlayerReady = function (event) {
             event.target.playVideo();
-            event.target.mute();
         };
 
         var destroyPlayer = function() {

@@ -5,8 +5,12 @@ template '/etc/init/dobrafaza.conf' do
   mode 0777
 end
 
-execute "restart service" do
+execute "stop service" do
   user "root"
   command "initctl stop dobrafaza"
+end
+
+execute "start service" do
+  user "root"
   command "initctl start dobrafaza"
 end
