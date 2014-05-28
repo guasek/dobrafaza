@@ -1,4 +1,4 @@
-%w[ /home/dobrafaza /home/dobrafaza/private_code/ /home/dobrafaza/.ssh /home/dobrafaza/deploy /home/dobrafaza/shared/node_modules ].each do |path|
+%w[ /home/dobrafaza /home/dobrafaza/private_code/ /home/dobrafaza/.ssh /home/dobrafaza/deploy /home/dobrafaza/deploy/shared/node_modules ].each do |path|
   directory path do
     owner "dobrafaza"
     group "root"
