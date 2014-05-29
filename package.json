@@ -1,6 +1,6 @@
 {
-  "name": "meannew",
-  "version": "0.0.0",
+  "name": "DobraFaza",
+  "version": "0.0.1",
   "dependencies": {
     "express": "~4.0.0",
     "morgan": "~1.0.0",

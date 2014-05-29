@@ -2,12 +2,7 @@
 /* global YT */
 
 
-angular.module('youtube', ['ng']).run(function () {
-    var tag = document.createElement('script');
-    tag.src = '//www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-})
+angular.module('youtube', ['ng'])
     .service('youtubePlayerApi', [function () {
         var service = {};
 
