@@ -6,9 +6,9 @@ function PlayList(movieList) {
     this.movieList = movieList;
 }
 
-PlayList.fromYoutubeIds = function (youtubeIds) {
-    return new PlayList(youtubeIds.map(function(youtubeId){
-        return new Video.youtubeVideo(youtubeId);
+PlayList.create = function (videos) {
+    return new PlayList(videos.map(function(video){
+        return new Video.youtubeVideo(video._id, video.videoId);
     }));
 };
 
@@ -32,4 +32,15 @@ PlayList.prototype.next = function () {
     var selectedMovie = this.movieList[this.currentItem];
     this.currentItem++;
     return selectedMovie;
+};
+
+PlayList.prototype.bringVideoToFront = function(videoId) {
+    for (var i = 0; i < this.movieList.length; i++) {
+        if (videoId == this.movieList[i].videoId) {
+            var toBeFirstVideo = this.movieList[i];
+            var firstVideosPart = this.movieList.slice(0, i);
+            var secondVideosPart = this.movieList.slice(i + 1);
+            this.movieList = [].concat(toBeFirstVideo, firstVideosPart, secondVideosPart);
+        }
+    }
 };

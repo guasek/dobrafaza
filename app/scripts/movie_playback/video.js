@@ -1,14 +1,15 @@
 
 'use strict';
 
-function Video(videoId) {
+function Video(videoId, vendorVideoId) {
     this.videoId = videoId;
+    this.vendorVideoId = vendorVideoId;
 }
 
-Video.youtubeVideo = function(youtubeId) {
-    return new Video(youtubeId);
+Video.youtubeVideo = function(videoId, youtubeId) {
+    return new Video(videoId, youtubeId);
 };
 
 Video.prototype.playWith = function(videoPlayer) {
-    videoPlayer.playYoutubeVideo(this.videoId);
+    videoPlayer.playYoutubeVideo(this.vendorVideoId);
 };
