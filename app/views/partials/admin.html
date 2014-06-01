@@ -1,4 +1,7 @@
-<form novalidate class="new-video-form">
-    PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="video.url" /><br />
-    <button ng-click="videoRepository.store(video); video.url = '';">DODAJ SKURWIELA</button>
+<form name="adminForm" novalidate class="new-video-form">
+    PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="video.url" ng-minlength="5"/>
+    <div
+            data-ng-hide="video.addedVideoId.length === 0 || video.url.length !== 0"
+            >Dodano filmik, link bezpośredni: {{baseUrl}}/play/{{video.addedVideoId}}</div><br />
+    <button ng-disable="adminForm.$invalid || adminForm.$pristine" ng-click="videoRepository.store(video); video.url = '';">DODAJ FILMIK</button>
 </form>

@@ -53,6 +53,16 @@ angular.module('youtube', ['ng'])
 
         return service;
     }])
+    .service('playerCode', ['$window', function ($window) {
+        return {
+            loadYoutubeScript: function () {
+                var tag = $window.document.createElement('script');
+                tag.src = '//www.youtube.com/iframe_api';
+                var firstScriptTag = $window.document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            }
+        };
+    }])
     .directive('youtubePlayer', ['youtubePlayerApi', function (youtubePlayerApi) {
         return {
             restrict:'A',

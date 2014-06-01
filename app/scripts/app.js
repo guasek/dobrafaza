@@ -15,6 +15,10 @@ angular.module('dobraFaza', [
         templateUrl: 'partials/video_player',
         controller: 'PlaybackController'
     })
+    .when('/play/:videoId', {
+        templateUrl: 'partials/video_player',
+        controller: 'PlaySpecificController'
+    })
     .when('/janrodzyn', {
         templateUrl: 'partials/admin',
         controller: 'AdminController'
