@@ -7,7 +7,8 @@ angular.module('dobraFaza', [
     'ngRoute',
     'advertising',
     'youtube',
-    'videoPlayback'
+    'videoPlayback',
+    'dobrafaza.animations'
 ])
 .config(function ($routeProvider, $locationProvider) {
     $routeProvider
