@@ -7,7 +7,7 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-<div id="by" class="extras">
+<!--<div id="by" class="extras">-->
     <!--<div google-adsense>-->
         <!--<ins class="adsbygoogle"-->
             <!--data-ad-client="ca-pub-4971215051679349"-->
@@ -18,7 +18,7 @@
             <!--(adsbygoogle = window.adsbygoogle || []).push({});-->
         <!--</script>-->
     <!--</div>-->
-</div>
+<!--</div>-->
 <section id="top">
     <div id="logo"></div>
     <p>Dobra faza z youtube bez przerwy, nie trać czasu na szukanie!
@@ -60,9 +60,24 @@
                 </div>
             </section>
         </div>
+        <div id="controls">
+            <h2>Oceń film </h2>
+            <a
+                href="#"
+                id="hate"
+                ng-click="$dfAnimate.disableVoting();"
+                class="fade-in">
+            </a>
+            <a
+                href="#"
+                id="props"
+                ng-click="$dfAnimate.disableVoting();"
+                class="fade-in">
+            </a>
+        </div>
     </div>
     <aside class="column">
-        <div id="next" ng-click="videoPlayer.playNextVideo()">
+        <div id="next" ng-click="currentVideo = videoPlayer.playNextVideo()">
             <p>Następny</p>
         </div>
         <div id="of">
@@ -79,3 +94,6 @@
         </div>
     </aside>
 </section>
+<footer>
+    Copyright &copy; 2014 by dobrafaza.pl. Nie kradnij huncwocie, a w razie W to pisz: <a href="mailto:kontakt@dobrafaza.pl">kontakt@dobrafaza.pl</a>
+</footer>
