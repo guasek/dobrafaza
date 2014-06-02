@@ -61,13 +61,23 @@
             </section>
         </div>
         <div id="controls">
-            <h2>Oceń film</h2>
-            <a href="#" id="hate" ng-click="$dfAnimate.disableVoting();" class="fade-in"></a>
-            <a href="#" id="props" ng-click="$dfAnimate.disableVoting();" class="fade-in"></a>
+            <h2>Oceń film </h2>
+            <a
+                href="#"
+                id="hate"
+                ng-click="$dfAnimate.disableVoting();"
+                class="fade-in">
+            </a>
+            <a
+                href="#"
+                id="props"
+                ng-click="$dfAnimate.disableVoting();"
+                class="fade-in">
+            </a>
         </div>
     </div>
     <aside class="column">
-        <div id="next" ng-click="videoPlayer.playNextVideo()">
+        <div id="next" ng-click="currentVideo = videoPlayer.playNextVideo()">
             <p>Następny</p>
         </div>
         <div id="of">

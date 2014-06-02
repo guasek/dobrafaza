@@ -9,13 +9,14 @@ angular.module('dobraFaza')
             'videoRepository',
             'playerCode',
             function ($scope, $window, videoPlayer, videoRepository, playerCode) {
+                $scope.currentVideo = null;
                 $window.onYouTubeIframeAPIReady = function () {
                     videoRepository.fetchAll().success(function(data) {
                         var playList = PlayList.create(data);
                         videoPlayer.setPlaylist(playList)
                         videoPlayer.shufflePlaylist();
                         $scope.videoPlayer = videoPlayer;
-                        videoPlayer.startPlayback();
+                        $scope.currentVideo = videoPlayer.startPlayback();
                     });
                 };
                 playerCode.loadYoutubeScript();
@@ -29,6 +30,7 @@ angular.module('dobraFaza')
             'videoRepository',
             'playerCode',
             function ($scope, $window, $routeParams, videoPlayer, videoRepository, playerCode) {
+                $scope.currentVideo = null;
                 $window.onYouTubeIframeAPIReady = function () {
                     videoRepository.fetchAll().success(function(data) {
                         var playList = PlayList.create(data);
@@ -36,7 +38,7 @@ angular.module('dobraFaza')
                         videoPlayer.shufflePlaylist();
                         videoPlayer.bringVideoToFront($routeParams.videoId)
                         $scope.videoPlayer = videoPlayer;
-                        videoPlayer.startPlayback();
+                        $scope.currentVideo = videoPlayer.startPlayback();
                     });
                 };
                 playerCode.loadYoutubeScript();

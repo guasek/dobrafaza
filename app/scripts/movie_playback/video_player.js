@@ -31,10 +31,11 @@ angular.module('videoPlayback', [])
             var video = this.playList.next();
             video.playWith(this);
             $dfAnimate.enableVoting();
+            return video;
         };
 
         var startPlayback = function () {
-            this.playNextVideo();
+            return this.playNextVideo();
         };
 
         var shufflePlaylist = function() {
