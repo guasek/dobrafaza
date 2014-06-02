@@ -1,35 +1,4 @@
 'use strict';
-/* global PlayList, RestVideoRepository */
-
-function VideoPlayer(youtubeVideoPlayer) {
-    this.playList = null;
-    this.youtubeVideoPlayer = youtubeVideoPlayer;
-}
-
-VideoPlayer.prototype.setPlaylist = function (playList) {
-    this.playList = playList;
-};
-
-VideoPlayer.prototype.startPlayback = function () {
-    this.playNextVideo();
-};
-
-VideoPlayer.prototype.playNextVideo = function () {
-    var video = this.playList.next();
-    video.playWith(this);
-};
-
-VideoPlayer.prototype.shufflePlaylist = function() {
-    this.playList.shuffle();
-};
-
-VideoPlayer.prototype.playYoutubeVideo = function(youtubeVideoId) {
-    this.youtubeVideoPlayer.playVideo(youtubeVideoId, this);
-};
-
-VideoPlayer.prototype.bringVideoToFront = function(videoId) {
-    this.playList.bringVideoToFront(videoId);
-};
 
 angular.module('videoPlayback', [])
     .factory('videoRepository', ['$http', function ($http) {
@@ -52,6 +21,42 @@ angular.module('videoPlayback', [])
             store: store
         };
     }])
-    .factory('videoPlayer', ['youtubePlayerApi', function(youtubeVideoPlayer) {
-        return new VideoPlayer(youtubeVideoPlayer);
+    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', function(youtubeVideoPlayer, $dfAnimate) {
+
+        var setPlaylist = function (playList) {
+            this.playList = playList;
+        };
+
+        var playNextVideo = function () {
+            var video = this.playList.next();
+            video.playWith(this);
+            $dfAnimate.enableVoting();
+        };
+
+        var startPlayback = function () {
+            this.playNextVideo();
+        };
+
+        var shufflePlaylist = function() {
+            this.playList.shuffle();
+        };
+
+        var playYoutubeVideo = function(youtubeVideoId) {
+            this.youtubeVideoPlayer.playVideo(youtubeVideoId, this);
+        };
+
+        var bringVideoToFront = function(videoId) {
+            this.playList.bringVideoToFront(videoId);
+        };
+
+        return {
+            playList: null,
+            youtubeVideoPlayer: youtubeVideoPlayer,
+            setPlaylist: setPlaylist,
+            playNextVideo: playNextVideo,
+            startPlayback: startPlayback,
+            shufflePlaylist: shufflePlaylist,
+            playYoutubeVideo: playYoutubeVideo,
+            bringVideoToFront: bringVideoToFront
+        }
     }]);
