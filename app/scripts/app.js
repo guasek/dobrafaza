@@ -8,7 +8,8 @@ angular.module('dobraFaza', [
     'advertising',
     'youtube',
     'videoPlayback',
-    'dobrafaza.animations'
+    'dobrafaza.animations',
+    'voting'
 ])
 .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -18,7 +19,7 @@ angular.module('dobraFaza', [
     })
     .when('/play/:videoId', {
         templateUrl: 'partials/video_player',
-        controller: 'PlaySpecificController'
+        controller: 'PlaybackController'
     })
     .when('/janrodzyn', {
         templateUrl: 'partials/admin',
