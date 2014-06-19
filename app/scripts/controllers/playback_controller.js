@@ -5,26 +5,6 @@ angular.module('dobraFaza')
         [
             '$scope',
             '$window',
-            'videoPlayer',
-            'videoRepository',
-            'playerCode',
-            function ($scope, $window, videoPlayer, videoRepository, playerCode) {
-                $scope.currentVideo = null;
-                $window.onYouTubeIframeAPIReady = function () {
-                    videoRepository.fetchAll().success(function(data) {
-                        var playList = PlayList.create(data);
-                        videoPlayer.setPlaylist(playList)
-                        videoPlayer.shufflePlaylist();
-                        $scope.videoPlayer = videoPlayer;
-                        $scope.currentVideo = videoPlayer.startPlayback();
-                    });
-                };
-                playerCode.loadYoutubeScript();
-    }])
-    .controller('PlaySpecificController',
-        [
-            '$scope',
-            '$window',
             '$routeParams',
             'videoPlayer',
             'videoRepository',

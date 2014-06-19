@@ -47,6 +47,9 @@ angular.module('videoPlayback', [])
         };
 
         var bringVideoToFront = function(videoId) {
+            if (typeof videoId === 'undefined') {
+                return;
+            }
             this.playList.bringVideoToFront(videoId);
         };
 
