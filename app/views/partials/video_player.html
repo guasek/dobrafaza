@@ -60,16 +60,16 @@
                 </div>
             </section>
         </div>
-        <div id="controls">
+        <div id="controls" ng-controller="VotingController">
             <h2>Oceń film </h2>
             <a
                 id="hate"
-                ng-click="$dfAnimate.disableVoting();"
+                ng-click="voter.voteDown(currentVideo); $dfAnimate.disableVoting();"
                 class="fade-in">
             </a>
             <a
                 id="props"
-                ng-click="$dfAnimate.disableVoting();"
+                ng-click="voter.voteUp(currentVideo); $dfAnimate.disableVoting();"
                 class="fade-in">
             </a>
         </div>

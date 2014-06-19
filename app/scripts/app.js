@@ -8,7 +8,8 @@ angular.module('dobraFaza', [
     'advertising',
     'youtube',
     'videoPlayback',
-    'dobrafaza.animations'
+    'dobrafaza.animations',
+    'voting'
 ])
 .config(function ($routeProvider, $locationProvider) {
     $routeProvider
