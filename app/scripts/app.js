@@ -18,7 +18,7 @@ angular.module('dobraFaza', [
     })
     .when('/play/:videoId', {
         templateUrl: 'partials/video_player',
-        controller: 'PlaySpecificController'
+        controller: 'PlaybackController'
     })
     .when('/janrodzyn', {
         templateUrl: 'partials/admin',
