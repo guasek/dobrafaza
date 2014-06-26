@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('dobraFaza', [
+    'ezfb',
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -29,4 +30,9 @@ angular.module('dobraFaza', [
         redirectTo: '/'
     });
     $locationProvider.html5Mode(true);
-});
+})
+.config(function (ezfbProvider) {
+    ezfbProvider.setInitParams({
+        appId: '155047164703791'
+    });
+});;
