@@ -8,7 +8,7 @@ function PlayList(movieList) {
 
 PlayList.create = function (videos) {
     return new PlayList(videos.map(function(video){
-        return new Video.youtubeVideo(video._id, video.videoId);
+        return new Video.youtubeVideo(video._id, video.videoId, video.title, video.votesUp, video.votesDown);
     }));
 };
 

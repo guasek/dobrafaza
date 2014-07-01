@@ -21,21 +21,23 @@ angular.module('videoPlayback', [])
             store: store
         };
     }])
-    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', function(youtubeVideoPlayer, $dfAnimate) {
+    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', '$rootScope', function(youtubeVideoPlayer, $dfAnimate, $rootScope) {
+
+        var currentlyPlayed = null;
 
         var setPlaylist = function (playList) {
             this.playList = playList;
         };
 
         var playNextVideo = function () {
-            var video = this.playList.next();
-            video.playWith(this);
+            this.currentlyPlayed = this.playList.next();
+            this.currentlyPlayed.playWith(this);
+            $rootScope.$apply();
             $dfAnimate.enableVoting();
-            return video;
         };
 
         var startPlayback = function () {
-            return this.playNextVideo();
+            this.playNextVideo();
         };
 
         var shufflePlaylist = function() {
@@ -54,6 +56,7 @@ angular.module('videoPlayback', [])
         };
 
         return {
+            currentlyPlayed: currentlyPlayed,
             playList: null,
             youtubeVideoPlayer: youtubeVideoPlayer,
             setPlaylist: setPlaylist,
