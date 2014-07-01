@@ -23,8 +23,8 @@ angular.module('youtube', ['ng'])
 
         var createPlayer = function (_videoId, context) {
             return new YT.Player(playerId, {
-                height: 427,
-                width: 700,
+                height: 360,
+                width: 640,
                 videoId: _videoId,
                 events: {
                     onReady: onPlayerReady,

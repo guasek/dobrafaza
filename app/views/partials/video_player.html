@@ -1,88 +1,66 @@
-<!--<div id="by" class="extras">-->
-    <!--<div google-adsense>-->
-        <!--<ins class="adsbygoogle"-->
-            <!--data-ad-client="ca-pub-4971215051679349"-->
-            <!--data-ad-slot="1084191838"-->
-            <!--style="display:inline-block;width:728px;height:90px">-->
-        <!--</ins>-->
-        <!--<script>-->
-            <!--(adsbygoogle = window.adsbygoogle || []).push({});-->
-        <!--</script>-->
-    <!--</div>-->
-<!--</div>-->
-<section id="top">
-    <div id="logo"></div>
-    <p>Dobra faza z youtube bez przerwy, nie trać czasu na szukanie!
-        <div id="facebook-like-wrapper">
-            <div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
-        </div>
-    </p>
-</section>
-<section id="content" class="ng-scope">
-    <div id="the">
-        <!--<div google-adsense>-->
-            <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-            <!--<ins class="adsbygoogle"-->
-                 <!--data-ad-client="ca-pub-4971215051679349"-->
-                 <!--data-ad-slot="5638815837"-->
-                 <!--style="display:inline-block;width:468px;height:15px">-->
-            <!--</ins>-->
-            <!--<script>-->
-                <!--(adsbygoogle = window.adsbygoogle || []).push({});-->
-            <!--</script>-->
-        <!--</div>-->
+<div class="row">
+    <div class="large-8 medium-8 small-12 columns title">
+        <h2>{{ videoPlayer.currentlyPlayed.title }}</h2>
     </div>
-    <aside class="column">
-        <div id="beard">
+    <div class="large-4 medium-4 small-12 columns">
+        <div class="b2">
             <div google-adsense>
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      data-ad-client="ca-pub-4971215051679349"
-                     data-ad-slot="8467857838"
-                     style="display:inline-block;width:120px;height:600px">
-                </ins>
-            </div>
-        </div>
-    </aside>
-    <div id="player">
-        <div>
-            <section>
-                <div id="ytplayer" youtube-player>
-                </div>
-            </section>
-        </div>
-        <div id="controls" ng-controller="VotingController">
-            <h2>Oceń film </h2>
-            <a
-                id="hate"
-                ng-click="voter.voteDown(currentVideo); $dfAnimate.disableVoting();"
-                class="fade-in">
-            </a>
-            <a
-                id="props"
-                ng-click="voter.voteUp(currentVideo); $dfAnimate.disableVoting();"
-                class="fade-in">
-            </a>
-        </div>
-    </div>
-    <aside class="column">
-        <div id="next" ng-click="currentVideo = videoPlayer.playNextVideo()">
-            <p>Następny</p>
-        </div>
-        <div id="of">
-            <div google-adsense>
-                <ins class="adsbygoogle"
-                     data-ad-client="ca-pub-4971215051679349"
-                     data-ad-slot="2421324235"
-                     style="display:inline-block;width:125px;height:125px">
+                     data-ad-slot="6222271432"
+                     style="display:inline-block;width:234px;height:60px">
                 </ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
         </div>
-    </aside>
-</section>
-<footer>
-    Copyright &copy; 2014 by dobrafaza.pl. Nie kradnij huncwocie, a w razie W to pisz: <a href="mailto:kontakt@dobrafaza.pl">kontakt@dobrafaza.pl</a>
-</footer>
+    </div>
+</div>
+<div class="row">
+    <div class="large-8 medium-12 small-12 columns">
+        <div id="video">
+            <div id="ytplayer" youtube-player>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns" ng-controller="VotingController">
+                <div id="voting">
+                    <a ng-click="voter.voteUp(videoPlayer.currentlyPlayed); $dfAnimate.disableVoting();" class="btn cool large-6 medium-6 small-12 columns">Dobra faza <span>({{ videoPlayer.currentlyPlayed.votesUp }})</span></a>
+                    <a ng-click="voter.voteDown(videoPlayer.currentlyPlayed); $dfAnimate.disableVoting();" class="btn shit large-6 medium-6 small-12 columns">Słabe <span>({{ videoPlayer.currentlyPlayed.votesDown }})</span></a>
+                </div>
+                <div id="voted" class="hide">
+                    Dzięki! Dzięki! Dzięki Tobie Dobra Faza będzie jeszcze lepsza!<br>
+                    Tymczasem <a ng-click="shareToFb(videoPlayer.currentlyPlayed);">udostępnij ten film!</a><br>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="large-4 medium-12 small-12 columns">
+        <div class="row share">
+            <div class="large-12 medium-12 small-12 columns">
+                <a href="" class="btn fb" ng-click="shareToFb(videoPlayer.currentlyPlayed);">Udostepnij ten film</a>
+            </div>
+            <div class="large-12 medium-12 small-12 columns">
+                <a href="" class="btn next" ng-click="videoPlayer.playNextVideo()">Następny film</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns text-center sense">
+                <div google-adsense>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle"
+                         data-ad-client="ca-pub-4971215051679349"
+                         data-ad-slot="1652471032"
+                         style="display:inline-block;width:300px;height:250px">
+                    </ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
