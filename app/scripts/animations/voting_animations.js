@@ -7,21 +7,13 @@ angular.module('dobrafaza.animations', [])
             var api = {};
 
             api.disableVoting = function disableVoting() {
-                var voteDown = angular.element(document.querySelector('#hate'));
-                var voteUp = angular.element(document.querySelector('#props'));
-                var castVoteText = angular.element(document.querySelector('#controls h2'));
-                voteDown.addClass('fade-out move-left');
-                voteUp.addClass('fade-out move-right');
-                castVoteText.text('Ocena zapisana');
+                angular.element(document.querySelector('#voting')).slideUp();
+                angular.element(document.querySelector('#voted')).slideDown();
             };
 
             api.enableVoting = function enableVoting() {
-                var voteDown = angular.element(document.querySelector('#hate'));
-                var voteUp = angular.element(document.querySelector('#props'));
-                var castVoteText = angular.element(document.querySelector('#controls h2'));
-                voteDown.removeClass('fade-out move-left');
-                voteUp.removeClass('fade-out move-right');
-                castVoteText.text('Oceń film');
+                angular.element(document.querySelector('#voting')).slideDown();
+                angular.element(document.querySelector('#voted')).slideUp();
             };
 
             return api;
