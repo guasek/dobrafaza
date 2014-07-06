@@ -3,6 +3,7 @@
 angular.module('dobraFaza')
     .controller('AdminController', ['$scope', '$window', 'videoRepository', function ($scope, $window, videoRepository) {
         $scope.video = {
+            title: '',
             url: '',
             addedVideoId: ''
         };
