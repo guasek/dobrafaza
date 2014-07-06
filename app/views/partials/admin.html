@@ -1,4 +1,5 @@
 <form name="adminForm" novalidate class="new-video-form">
+    Tytuł filmu: <input class="admin-input-vid" type="text" ng-model="video.title"/><br/>
     PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="video.url" ng-minlength="5"/>
     <div
             data-ng-hide="video.addedVideoId.length === 0 || video.url.length !== 0"

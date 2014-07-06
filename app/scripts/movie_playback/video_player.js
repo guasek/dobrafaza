@@ -10,7 +10,7 @@ angular.module('videoPlayback', [])
         var store = function (video) {
             var youtubeRegex = /^.*v=([^#\&\?]*).*/;
             var youtubeId = youtubeRegex.exec(video.url, 'i');
-            $http.put('/api/videos', {videoId: youtubeId[1], vendorId: 1})
+            $http.put('/api/videos', {title: video.title, videoId: youtubeId[1], vendorId: 1})
                 .success(function (responseData){
                     video.addedVideoId = responseData._id;
                 });
