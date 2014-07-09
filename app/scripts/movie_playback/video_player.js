@@ -21,7 +21,7 @@ angular.module('videoPlayback', [])
             store: store
         };
     }])
-    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', '$rootScope', function(youtubeVideoPlayer, $dfAnimate, $rootScope) {
+    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', '$rootScope', '$location', function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location) {
 
         var currentlyPlayed = null;
 
@@ -34,6 +34,7 @@ angular.module('videoPlayback', [])
             this.currentlyPlayed.playWith(this);
             $rootScope.$apply();
             $dfAnimate.enableVoting();
+            $location.path('/play/' + this.currentlyPlayed.videoId, false);
         };
 
         var startPlayback = function () {
