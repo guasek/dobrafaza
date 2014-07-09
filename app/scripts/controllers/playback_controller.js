@@ -15,8 +15,11 @@ angular.module('dobraFaza')
                 $scope.shareToFb = function(video) {
                     ezfb.ui(
                         {
-                            method: 'share',
-                            href: $window.location.host + '/play/' + video.videoId
+                            method: 'feed',
+                            link: $window.location.host + '/play/' + video.videoId,
+                            name: video.title,
+                            picture: 'http://i1.ytimg.com/vi/' + video.vendorVideoId + '/mqdefault.jpg',
+                            description: 'DobraFaza - włączasz i oglądasz'
                         }
                     );
                 };
