@@ -32,9 +32,9 @@ angular.module('videoPlayback', [])
         var playNextVideo = function () {
             this.currentlyPlayed = this.playList.next();
             this.currentlyPlayed.playWith(this);
+            $location.path('/play/' + this.currentlyPlayed.videoId, false);
             $rootScope.$apply();
             $dfAnimate.enableVoting();
-            $location.path('/play/' + this.currentlyPlayed.videoId, false);
         };
 
         var startPlayback = function () {
