@@ -1,8 +1,8 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html ng-app="dobraFaza">
+    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+    <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,12 @@
     <meta name="description" content="Dobra faza z youtube bez przerwy, nie trać czasu na szukanie!">
     <meta name="viewport" content="width=device-width">
     <meta name="fragment" content="!">
+    <meta property="og:title" content="{{ video.title }}" />
+    <meta property="og:site_name" content="DobraFaza" />
+    <meta property="og:url" content="http://dobrafaza.pl/play/{{video.videoId}}" />
+    <meta property="og:description" content="Włączasz i oglądasz, nie trać czasu na szukanie..." />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:image" content="http://i1.ytimg.com/vi/{{video.vendorVideoId}}/hqdefault.jpg" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <!-- endbuild -->
@@ -23,7 +29,7 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="dobraFaza">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -52,16 +58,16 @@
                     </div>
                 </div>
             </div>
-            <div class="large-2 medium-2 small-12 columns text-center">
-                <div id="facebook-like-wrapper" class="facebook">
-                    <div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
-                </div>
-            </div>
+            <!--<div class="large-2 medium-2 small-12 columns text-center">-->
+                <!--<div id="facebook-like-wrapper" class="facebook">-->
+                    <!--<div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </header>
 
     <!-- Add your site or application content here -->
-    <section id="content" ng-view=""></section>
+    <section id="content" ng-view></section>
 
     <footer>
         <div class="row">

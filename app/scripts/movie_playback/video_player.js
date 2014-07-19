@@ -31,6 +31,7 @@ angular.module('videoPlayback', [])
 
         var playNextVideo = function () {
             this.currentlyPlayed = this.playList.next();
+            $rootScope.video = this.currentlyPlayed;
             this.currentlyPlayed.playWith(this);
             $location.path('/play/' + this.currentlyPlayed.videoId, false);
             $rootScope.$apply();
