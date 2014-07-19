@@ -33,51 +33,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <header>
-        <div class="row">
-            <div class="large-4 medium-4 small-12 columns">
-                <h1>
-                    <a>
-                        <img ng-click="goToHome();" src="images/logo.png" alt="">
-                    </a>
-                </h1>
-            </div>
-            <div class="large-6 medium-8 small-12 columns text-center">
-                <div class="b1">
-                    <div google-adsense>
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <ins class="adsbygoogle"
-                             data-ad-client="ca-pub-4971215051679349"
-                             data-ad-slot="1711346636"
-                             style="display:inline-block;width:468px;height:15px">
-                        </ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="large-2 medium-2 small-12 columns text-center">-->
-                <!--<div id="facebook-like-wrapper" class="facebook">-->
-                    <!--<div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
-    </header>
-
-    <!-- Add your site or application content here -->
-    <section id="content" ng-view></section>
-
-    <footer>
-        <div class="row">
-            <div class="large-12 medium-12 small-12 columns blue">
-                <p>
-                    Copyright &copy; 2014 by dobrafaza.pl. <a href="mailto:kontakt@dobrafaza.pl">kontakt@dobrafaza.pl</a>
-                </p>
-            </div>
-        </div>
-    </footer>
+    <div ng-view></div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
