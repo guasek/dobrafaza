@@ -21,7 +21,13 @@ angular.module('videoPlayback', [])
             store: store
         };
     }])
-    .factory('videoPlayer', ['youtubePlayerApi', '$dfAnimate', '$rootScope', '$location', function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location) {
+    .factory('videoPlayer', [
+            'youtubePlayerApi',
+            '$dfAnimate',
+            '$rootScope',
+            '$location',
+            '$cookieStore',
+            function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $cookieStore) {
 
         var currentlyPlayed = null;
 
@@ -32,10 +38,21 @@ angular.module('videoPlayback', [])
         var playNextVideo = function () {
             this.currentlyPlayed = this.playList.next();
             $rootScope.video = this.currentlyPlayed;
+
             this.currentlyPlayed.playWith(this);
             $location.path('/play/' + this.currentlyPlayed.videoId, false);
+
             $rootScope.$apply();
             $dfAnimate.enableVoting();
+
+            var seenMovies = $cookieStore.get('seenMovies');
+            if (typeof seenMovies === 'undefined') {
+                seenMovies = [];
+            }
+            if (seenMovies.indexOf(this.currentlyPlayed.videoId) === -1) {
+                seenMovies.push(this.currentlyPlayed.videoId);
+                $cookieStore.put('seenMovies', seenMovies);
+            }
         };
 
         var startPlayback = function () {

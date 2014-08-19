@@ -6,8 +6,14 @@ function PlayList(movieList) {
     this.movieList = movieList;
 }
 
-PlayList.create = function (videos) {
-    return new PlayList(videos.map(function(video){
+PlayList.create = function (videos, seenMovies, startVideo) {
+    var filteredVideos = videos;
+    if (typeof seenMovies !== 'undefined') {
+        filteredVideos = videos.filter(function(video){
+            return seenMovies.indexOf(video._id) === -1 || video._id === startVideo;
+        });
+    }
+    return new PlayList(filteredVideos.map(function(video){
         return new Video.youtubeVideo(video._id, video.videoId, video.title, video.votesUp, video.votesDown);
     }));
 };

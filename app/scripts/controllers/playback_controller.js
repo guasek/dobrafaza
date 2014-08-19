@@ -5,12 +5,13 @@ angular.module('dobraFaza')
         [
             '$scope',
             '$window',
+            '$cookieStore',
             '$routeParams',
             'videoPlayer',
             'videoRepository',
             'playerCode',
             'ezfb',
-            function ($scope, $window, $routeParams, videoPlayer, videoRepository, playerCode, ezfb) {
+            function ($scope, $window, $cookieStore, $routeParams, videoPlayer, videoRepository, playerCode, ezfb) {
                 $scope.currentVideo = null;
                 $scope.shareToFb = function(video) {
                     ezfb.ui(
@@ -22,10 +23,12 @@ angular.module('dobraFaza')
                 };
                 $window.onYouTubeIframeAPIReady = function () {
                     videoRepository.fetchAll().success(function(data) {
-                        var playList = PlayList.create(data);
+                        var seenMovies = $cookieStore.get('seenMovies');
+                        var startFromMovie = $routeParams.videoId;
+                        var playList = PlayList.create(data, seenMovies, startFromMovie);
                         videoPlayer.setPlaylist(playList)
                         videoPlayer.shufflePlaylist();
-                        videoPlayer.bringVideoToFront($routeParams.videoId)
+                        videoPlayer.bringVideoToFront(startFromMovie)
                         $scope.videoPlayer = videoPlayer;
                         videoPlayer.startPlayback();
                     });
