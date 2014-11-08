@@ -30,6 +30,7 @@ angular.module('videoPlayback', [])
             function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $cookieStore) {
 
         var currentlyPlayed = null;
+        var maxSeenMovies = 100;
 
         var setPlaylist = function (playList) {
             this.playList = playList;
@@ -46,7 +47,7 @@ angular.module('videoPlayback', [])
             $dfAnimate.enableVoting();
 
             var seenMovies = $cookieStore.get('seenMovies');
-            if (typeof seenMovies === 'undefined') {
+            if (typeof seenMovies === 'undefined' || seenMovies.length > maxSeenMovies) {
                 seenMovies = [];
             }
             if (seenMovies.indexOf(this.currentlyPlayed.videoId) === -1) {
