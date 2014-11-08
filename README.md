@@ -11,3 +11,18 @@ $ bower install
 $ sudo apt-get install ruby-compass
 $ sudo grunt serve
 ```
+
+#Deploy
+
+First you have to have chef and
+
+```sh
+$ sudo yum install ruby-devel gcc
+$ gem install knife-solo
+```
+
+Then you can execute deploy script
+
+```sh
+$ knife ssh ec2-54-200-237-88.us-west-2.compute.amazonaws.com 'sudo chef-client' -m -x ubuntu -i /home/glasek/.ssh/amazon.pem
+```
