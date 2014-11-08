@@ -6,6 +6,7 @@ angular.module('dobraFaza', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
+    'adaptive.detection',
     'advertising',
     'youtube',
     'videoPlayback',

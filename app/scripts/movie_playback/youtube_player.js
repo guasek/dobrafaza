@@ -3,13 +3,20 @@
 
 
 angular.module('youtube', ['ng'])
-    .service('youtubePlayerApi', [function () {
+    .service('youtubePlayerApi', ['$detection', function (mobileDetection) {
         var service = {};
 
         var playerId = null;
         var player = null;
 
         var onPlayerReady = function (event) {
+            if (mobileDetection.isAndroid() ||
+                mobileDetection.isiOS() ||
+                mobileDetection.isWindowsPhone() ||
+                mobileDetection.isBB10()) {
+                return;
+            }
+
             event.target.playVideo();
         };
 
