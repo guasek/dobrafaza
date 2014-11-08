@@ -26,9 +26,8 @@ angular.module('dobraFaza')
                         var seenMovies = $cookieStore.get('seenMovies');
                         var startFromMovie = $routeParams.videoId;
                         var playList = PlayList.create(data, seenMovies, startFromMovie);
-                        videoPlayer.setPlaylist(playList)
-                        videoPlayer.shufflePlaylist();
-                        videoPlayer.bringVideoToFront(startFromMovie)
+                        videoPlayer.setPlaylist(playList);
+                        videoPlayer.bringVideoToFront(startFromMovie);
                         $scope.videoPlayer = videoPlayer;
                         videoPlayer.startPlayback();
                     });
