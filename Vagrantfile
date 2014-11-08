@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 9000, host: 9000
   config.vm.network :forwarded_port, guest: 3306, host: 3306
 
-  config.vm.network :private_network, ip: '192.192.1.2'
+  config.vm.network :private_network, ip: '192.192.1.10'
 
   config.ssh.forward_agent = true
   
@@ -27,6 +27,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = "chef/roles"
     chef.data_bags_path = "chef/data_bags"
 #    chef.log_level = :debug
-#    chef.add_role "dobrafaza-single-node"
+    chef.add_role "dobrafaza-single-node"
   end
 end
