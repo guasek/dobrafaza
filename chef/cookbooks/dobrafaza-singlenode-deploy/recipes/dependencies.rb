@@ -1,5 +1,4 @@
-execute "build npm" do
+execute "build compass" do
   cwd "/home/dobrafaza/deploy/current"
-  command "apt-get install ruby-dev"
   command "gem install compass"
 end
