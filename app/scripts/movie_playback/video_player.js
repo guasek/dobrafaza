@@ -56,6 +56,16 @@ angular.module('videoPlayback', [])
             }
         };
 
+        var playPreviousVideo = function () {
+            this.currentlyPlayed = this.playList.previous();
+            $rootScope.video = this.currentlyPlayed;
+            this.currentlyPlayed.playWith(this);
+
+            $location.path('/play/' + this.currentlyPlayed.videoId, false);
+            $rootScope.$apply();
+            $dfAnimate.enableVoting();
+        };
+
         var startPlayback = function () {
             this.playNextVideo();
         };
@@ -84,6 +94,7 @@ angular.module('videoPlayback', [])
             startPlayback: startPlayback,
             shufflePlaylist: shufflePlaylist,
             playYoutubeVideo: playYoutubeVideo,
-            bringVideoToFront: bringVideoToFront
+            bringVideoToFront: bringVideoToFront,
+            playPreviousVideo: playPreviousVideo
         }
     }]);

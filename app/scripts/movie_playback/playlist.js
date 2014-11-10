@@ -2,7 +2,7 @@
 /* global Video */
 
 function PlayList(movieList) {
-    this.currentItem = 0;
+    this.currentItem = -1;
     this.movieList = movieList;
 }
 
@@ -35,10 +35,18 @@ PlayList.prototype.shuffle = function () {
 };
 
 PlayList.prototype.next = function () {
-    var selectedMovie = this.movieList[this.currentItem];
     this.currentItem++;
+    var selectedMovie = this.movieList[this.currentItem];
     return selectedMovie;
 };
+
+PlayList.prototype.previous = function () {
+    if (this.currentItem > 0) {
+        this.currentItem--;
+    }
+    var selectedMovie = this.movieList[this.currentItem];
+    return selectedMovie;
+}
 
 PlayList.prototype.bringVideoToFront = function(videoId) {
     for (var i = 0; i < this.movieList.length; i++) {
