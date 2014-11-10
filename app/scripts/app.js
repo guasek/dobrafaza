@@ -55,5 +55,5 @@ angular.module('dobraFaza', [
 .run(['$rootScope', '$window', function($rootScope, $window) {
     $rootScope.goToHome = function() {
         $window.location.href = '/';
-    }
+    };
 }]);

@@ -29,6 +29,7 @@ angular.module('youtube', ['ng'])
         };
 
         var createPlayer = function (_videoId, context) {
+            /* jshint camelcase: false */
             return new YT.Player(playerId, {
                 height: 360,
                 width: 640,

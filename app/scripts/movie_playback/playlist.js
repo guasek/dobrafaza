@@ -46,11 +46,11 @@ PlayList.prototype.previous = function () {
     }
     var selectedMovie = this.movieList[this.currentItem];
     return selectedMovie;
-}
+};
 
 PlayList.prototype.bringVideoToFront = function(videoId) {
     for (var i = 0; i < this.movieList.length; i++) {
-        if (videoId == this.movieList[i].videoId) {
+        if (videoId === this.movieList[i].videoId) {
             var toBeFirstVideo = this.movieList[i];
             var firstVideosPart = this.movieList.slice(0, i);
             var secondVideosPart = this.movieList.slice(i + 1);

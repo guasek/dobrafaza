@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('dobrafaza.animations', [])
     .run(['$rootScope', '$dfAnimate', function($rootScope, $dfAnimate){
         $rootScope.$dfAnimate = $dfAnimate;

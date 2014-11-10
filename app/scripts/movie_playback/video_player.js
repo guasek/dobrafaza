@@ -14,20 +14,20 @@ angular.module('videoPlayback', [])
                 .success(function (responseData){
                     video.addedVideoId = responseData._id;
                 });
-        }
+        };
 
         return {
             fetchAll: fetchAll,
             store: store
         };
     }])
-    .factory('videoPlayer', [
-            'youtubePlayerApi',
-            '$dfAnimate',
-            '$rootScope',
-            '$location',
-            '$cookieStore',
-            function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $cookieStore) {
+    .factory('videoPlayer',
+        ['youtubePlayerApi',
+         '$dfAnimate',
+         '$rootScope',
+         '$location',
+         '$cookieStore',
+         function(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $cookieStore) {
 
         var currentlyPlayed = null;
         var maxSeenMovies = 100;
@@ -96,5 +96,5 @@ angular.module('videoPlayback', [])
             playYoutubeVideo: playYoutubeVideo,
             bringVideoToFront: bringVideoToFront,
             playPreviousVideo: playPreviousVideo
-        }
+        };
     }]);
