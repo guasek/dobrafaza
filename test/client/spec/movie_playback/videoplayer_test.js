@@ -7,12 +7,11 @@ describe('Videoplayer tests', function () {
 
 
     it('Should create videoplayer with playlist.', function () {
-        var playlist = PlayList.fromYoutubeIds(['oukX49mJppM', 'Yz1rfDY-wlg']);
-        var youtubeVideoPlayer = {
-            playVideo: function(youtubeId) {}
-        };
+        var playlist = PlayList.create(testVideos);
 
-        var videoPlayer = new VideoPlayer(youtubeVideoPlayer);
+        var videoPlayer = new VideoPlayer(
+            youtubeVideoPlayer, dfAnimateMock, rootScopeMock, locationMock, cookieStoreMock
+        );
         videoPlayer.setPlaylist(playlist);
         spyOn(youtubeVideoPlayer, 'playVideo');
 
@@ -20,15 +19,15 @@ describe('Videoplayer tests', function () {
         expect(youtubeVideoPlayer.playVideo).toHaveBeenCalledWith('oukX49mJppM', videoPlayer);
 
         videoPlayer.playNextVideo();
-        expect(youtubeVideoPlayer.playVideo).toHaveBeenCalledWith('Yz1rfDY-wlg', videoPlayer);
+        expect(youtubeVideoPlayer.playVideo).toHaveBeenCalledWith('KRwDTj-Rcmk', videoPlayer);
     });
 
     it('Can shuffle playlist.', function () {
-        var youtubeVideoPlayer = {
-            playVideo: function(youtubeId) {}
-        };
-        var playlist = PlayList.fromYoutubeIds(['oukX49mJppM', 'Yz1rfDY-wlg', 'KRwDTj-Rcmk', 'ca1nQa2Feb0']);
-        var videoPlayer = new VideoPlayer(youtubeVideoPlayer);
+        var playlist = PlayList.create(testVideos);
+
+        var videoPlayer = new VideoPlayer(
+            youtubeVideoPlayer, dfAnimateMock, rootScopeMock, locationMock, cookieStoreMock
+        );
         videoPlayer.setPlaylist(playlist);
 
         spyOn(playlist, 'shuffle');

@@ -17,9 +17,13 @@ module.exports = function(config) {
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-easyfb/angular-easyfb.js',
+      'app/bower_components/angular-adaptive-detection/angular-adaptive-detection.min.js',
+      'app/scripts/voting/voting_controller.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/client/mock/**/*.js',
+      'test/client/fixtures/**/*.js',
+      'test/client/mocks/**/*.js',
       'test/client/spec/**/*.js'
     ],
 
@@ -46,7 +50,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

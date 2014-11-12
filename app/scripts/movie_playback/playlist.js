@@ -1,25 +1,21 @@
 'use strict';
 /* global Video */
 
-function PlayList(movieList) {
+function PlayList(videoList, filter) {
     this.currentItem = -1;
-    this.movieList = movieList;
+    this.videoList = videoList;
+    this.filter = filter;
 }
 
-PlayList.create = function (videos, seenMovies, startVideo) {
-    var filteredVideos = videos;
-    if (typeof seenMovies !== 'undefined') {
-        filteredVideos = videos.filter(function(video){
-            return seenMovies.indexOf(video._id) === -1 || video._id === startVideo;
-        });
-    }
-    return new PlayList(filteredVideos.map(function(video){
+PlayList.create = function (rawVideos, filter) {
+    var videos = rawVideos.map(function(video){
         return new Video.youtubeVideo(video._id, video.videoId, video.title, video.votesUp, video.votesDown);
-    }));
+    })
+    return new PlayList(videos, filter);
 };
 
 PlayList.prototype.shuffle = function () {
-    var currentIndex = this.movieList.length;
+    var currentIndex = this.videoList.length;
     var temporaryValue, randomIndex;
 
     while (0 !== currentIndex) {
@@ -27,16 +23,16 @@ PlayList.prototype.shuffle = function () {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        temporaryValue = this.movieList[currentIndex];
-        this.movieList[currentIndex] = this.movieList[randomIndex];
-        this.movieList[randomIndex] = temporaryValue;
+        temporaryValue = this.videoList[currentIndex];
+        this.videoList[currentIndex] = this.videoList[randomIndex];
+        this.videoList[randomIndex] = temporaryValue;
     }
     this.currentItem = 0;
 };
 
 PlayList.prototype.next = function () {
     this.currentItem++;
-    var selectedMovie = this.movieList[this.currentItem];
+    var selectedMovie = this.videoList[this.currentItem];
     return selectedMovie;
 };
 
@@ -44,17 +40,17 @@ PlayList.prototype.previous = function () {
     if (this.currentItem > 0) {
         this.currentItem--;
     }
-    var selectedMovie = this.movieList[this.currentItem];
+    var selectedMovie = this.videoList[this.currentItem];
     return selectedMovie;
 };
 
 PlayList.prototype.bringVideoToFront = function(videoId) {
-    for (var i = 0; i < this.movieList.length; i++) {
-        if (videoId === this.movieList[i].videoId) {
-            var toBeFirstVideo = this.movieList[i];
-            var firstVideosPart = this.movieList.slice(0, i);
-            var secondVideosPart = this.movieList.slice(i + 1);
-            this.movieList = [].concat(toBeFirstVideo, firstVideosPart, secondVideosPart);
+    for (var i = 0; i < this.videoList.length; i++) {
+        if (videoId === this.videoList[i].videoId) {
+            var toBeFirstVideo = this.videoList[i];
+            var firstVideosPart = this.videoList.slice(0, i);
+            var secondVideosPart = this.videoList.slice(i + 1);
+            this.videoList = [].concat(toBeFirstVideo, firstVideosPart, secondVideosPart);
         }
     }
 };
