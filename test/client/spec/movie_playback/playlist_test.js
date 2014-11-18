@@ -6,7 +6,7 @@ describe('Playlist tests', function () {
     beforeEach(module('dobraFaza'));
 
     it('Should create and shuffle playlist.', function () {
-        var seenMoviesFilter = new SeenMoviesVideoFilter(['oukX49mJppM']);
+        var seenMoviesFilter = new SeenVideosFilter(['oukX49mJppM']);
 
         var playlist = PlayList.create(testVideos, seenMoviesFilter);
 
@@ -28,14 +28,14 @@ describe('Playlist tests', function () {
         expect(video).toNotEqual(anotherVideo);
     });
 
-    //TODO: Dopisać poprawne kategorie do testvideos, tak, żeby wyświetlał się tylko czwarty film.
+    //TODO: Dodać test na dynamiczne włączenie kategorii - czy zmieni się zwracany film.
     it('Should be able to properly filter played videos.', function () {
         var showCategory = new Category(1, 'Category name', true);
+        var dontShowCategory = new Category(2, 'Category name', false);
 
         var startVideoFilter = new ExclusiveVideoFilter(testVideos[0]._id);
-        var seenMoviesFilter = new SeenMoviesVideoFilter([testVideos[1]._id]);
-        var categoryFilter = new CategoryVideoFilter([showCategory]);
-
+        var seenMoviesFilter = new SeenVideosFilter([testVideos[1]._id]);
+        var categoryFilter = new CategoryVideoFilter([showCategory, dontShowCategory]);
         var completeFilter = new AlternativeVideoFilter(
             startVideoFilter, new ConjunctionVideoFilter(seenMoviesFilter, categoryFilter)
         )
@@ -48,5 +48,7 @@ describe('Playlist tests', function () {
         var anotherVideo = playlist.next();
         expect(anotherVideo.idEquals(testVideos[3]._id)).toBeTruthy();
 
+        var previousVideo = playlist.previous();
+        expect(previousVideo.idEquals(testVideos[0]._id)).toBeTruthy();
     });
 });

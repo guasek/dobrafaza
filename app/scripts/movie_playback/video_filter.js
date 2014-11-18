@@ -27,7 +27,7 @@ CategoryVideoFilter.prototype.shouldPlay = function (video) {
         }
     }
     return false;
-}
+};
 
 /**
  * Seen movies playlist filter. Can filter movies basing on the fact whether
@@ -37,7 +37,10 @@ CategoryVideoFilter.prototype.shouldPlay = function (video) {
  *
  * @constructor
  */
-function SeenMoviesVideoFilter(seenMovies) {
+function SeenVideosFilter(seenMovies) {
+    if (!Array.isArray(seenMovies)) {
+        throw new Error('You have to pass a list of movies');
+    }
     this.seenMoviesIds = seenMovies;
 }
 
@@ -48,7 +51,7 @@ function SeenMoviesVideoFilter(seenMovies) {
  *
  * @return {boolean}
  */
-SeenMoviesVideoFilter.prototype.shouldPlay = function (video) {
+SeenVideosFilter.prototype.shouldPlay = function (video) {
     for(var index = 0; index < this.seenMoviesIds.length; index++) {
         var comparedId = this.seenMoviesIds[index];
         if (video.idEquals(comparedId)) {
@@ -56,7 +59,7 @@ SeenMoviesVideoFilter.prototype.shouldPlay = function (video) {
         }
     }
     return true;
-}
+};
 
 /**
  * Exclusive video filter. Responds true if checked video id is equal
@@ -78,8 +81,8 @@ function ExclusiveVideoFilter(exclusiveVideoId) {
  * @return {boolean}
  */
 ExclusiveVideoFilter.prototype.shouldPlay = function (video) {
-    return video.idEquals(this.exclusiveVideoId)
-}
+    return video.idEquals(this.exclusiveVideoId);
+};
 
 /**
  * Conjunction filter that checks whether both filter allows video to be played.
@@ -99,11 +102,11 @@ function ConjunctionVideoFilter(firstFilter, secondFilter) {
  *
  * @param {Video} video Video to be checked.
  *
- * @return {booleanshould}
+ * @return {boolean}
  */
 ConjunctionVideoFilter.prototype.shouldPlay = function (video) {
     return this.firstFilter.shouldPlay(video) && this.secondFilter.shouldPlay(video);
-}
+};
 
 /**
  * Logical alternative video filter.
@@ -127,4 +130,4 @@ function AlternativeVideoFilter(firstFilter, secondFilter) {
  */
 AlternativeVideoFilter.prototype.shouldPlay = function (video) {
     return this.firstFilter.shouldPlay(video) || this.secondFilter.shouldPlay(video);
-}
+};

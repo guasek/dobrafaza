@@ -7,7 +7,7 @@ describe('Videoplayer tests', function () {
 
 
     it('Should create videoplayer with playlist.', function () {
-        var playlist = PlayList.create(testVideos);
+        var playlist = PlayList.create(testVideos, filterStub);
 
         var videoPlayer = new VideoPlayer(
             youtubeVideoPlayer, dfAnimateMock, rootScopeMock, locationMock, cookieStoreMock

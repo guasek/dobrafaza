@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Playlist filters tests', function () {
+describe('Video filters tests', function () {
 
     // load the controller's module
     beforeEach(module('dobraFaza'));
@@ -32,7 +32,7 @@ describe('Playlist filters tests', function () {
         var videoToBeShown = Video.youtubeVideo(1, 'oukX49mJppM', "Title", 0, 0, [1]);
         var videoNotToBeShown = Video.youtubeVideo(2, 'oukX49mJppM', "Title", 0, 0, [2, 3]);
 
-        var seenMoviesPlaylistFilter = new SeenMoviesVideoFilter([2]);
+        var seenMoviesPlaylistFilter = new SeenVideosFilter([2]);
 
         expect(seenMoviesPlaylistFilter.shouldPlay(videoToBeShown)).toBeTruthy()
         expect(seenMoviesPlaylistFilter.shouldPlay(videoNotToBeShown)).toBeFalsy()
@@ -48,7 +48,7 @@ describe('Playlist filters tests', function () {
         var videoNotToBeShown3 = Video.youtubeVideo(4, 'oukX49mJppM', "Title", 0, 0, [2]);
 
         var categoryPlaylistFilter = new CategoryVideoFilter([category1, category2]);
-        var seenMoviesPlaylistFilter = new SeenMoviesVideoFilter([3, 4]);
+        var seenMoviesPlaylistFilter = new SeenVideosFilter([3, 4]);
         var conjunctPlaylistFilter = new ConjunctionVideoFilter(categoryPlaylistFilter, seenMoviesPlaylistFilter);
 
         expect(conjunctPlaylistFilter.shouldPlay(videoToBeShown)).toBeTruthy();
@@ -85,5 +85,9 @@ describe('Playlist filters tests', function () {
         expect(alternativePlaylistFilter.shouldPlay(videoToBeShown1)).toBeTruthy();
         expect(alternativePlaylistFilter.shouldPlay(videoToBeShown2)).toBeTruthy();
         expect(alternativePlaylistFilter.shouldPlay(videoNotToBeShown)).toBeFalsy();
+    });
+
+    it('should throw an exception when you don\'t pass an array to seen videos filter' , function () {
+        expect(function() {new SeenVideosFilter(undefined)}).toThrow(new Error('You have to pass a list of movies'));
     });
 });

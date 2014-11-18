@@ -9,8 +9,11 @@ var rootScopeMock = {
 };
 var locationMock = {
     path: function() {}
-}
+};
 var cookieStoreMock = {
     put: function() {},
     get: function() {}
-}
+};
+var filterStub = {
+    shouldPlay: function(){return true;}
+};
