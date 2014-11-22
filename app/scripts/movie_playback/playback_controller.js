@@ -6,9 +6,9 @@ angular
     .module('dobraFaza')
     .controller('PlaybackController',
         ['$scope', '$window', '$cookieStore', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
-         'categoryRepository', 'playerCode', 'ezfb',
+         'categoryRepository', 'playerCode', 'ezfb', 'eventPublisher', 'votingEnablingSubscriber',
          function ($scope, $window, $cookieStore, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb)
+                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber)
         {
             $scope.currentVideo = null;
             $scope.shareToFb = function(video) {
@@ -35,6 +35,8 @@ angular
                         new ConjunctionVideoFilter(seenMoviesFilter, categoriesFilter)
                     );
                     var playList = new PlayList(videos, playlistFilter);
+
+                    eventPublisher.subscribe(votingEnablingSubscriber);
 
                     videoPlayer.setPlaylist(playList);
                     videoPlayer.bringVideoToFront(startVideoId);

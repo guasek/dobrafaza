@@ -1,3 +1,4 @@
+/* global VotingEnablingSubscriber, VotingDisablingSubscriber */
 'use strict';
 
 angular.module('dobrafaza.animations', [])
@@ -20,4 +21,6 @@ angular.module('dobrafaza.animations', [])
 
             return api;
         }];
-    });
+    })
+    .factory('votingEnablingSubscriber', ['$dfAnimate', '$location', VotingEnablingSubscriber])
+    .factory('votingDisablingSubscriber', ['$dfAnimate', VotingDisablingSubscriber]);

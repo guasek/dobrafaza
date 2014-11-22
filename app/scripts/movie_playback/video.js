@@ -1,4 +1,4 @@
-/*exported VideoRepository */
+/* exported VideoRepository */
 'use strict';
 
 function Video(videoId, vendorVideoId, title, votesUp, votesDown, categories) {

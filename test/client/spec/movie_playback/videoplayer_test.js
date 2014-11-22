@@ -10,7 +10,7 @@ describe('Videoplayer tests', function () {
         var playlist = PlayList.create(testVideos, filterStub);
 
         var videoPlayer = new VideoPlayer(
-            youtubeVideoPlayer, dfAnimateMock, rootScopeMock, locationMock, cookieStoreMock
+            youtubeVideoPlayer, rootScopeMock, locationMock, cookieStoreMock, eventDispatcherMock
         );
         videoPlayer.setPlaylist(playlist);
         spyOn(youtubeVideoPlayer, 'playVideo');
@@ -20,19 +20,5 @@ describe('Videoplayer tests', function () {
 
         videoPlayer.playNextVideo();
         expect(youtubeVideoPlayer.playVideo).toHaveBeenCalledWith('KRwDTj-Rcmk', videoPlayer);
-    });
-
-    it('Can shuffle playlist.', function () {
-        var playlist = PlayList.create(testVideos);
-
-        var videoPlayer = new VideoPlayer(
-            youtubeVideoPlayer, dfAnimateMock, rootScopeMock, locationMock, cookieStoreMock
-        );
-        videoPlayer.setPlaylist(playlist);
-
-        spyOn(playlist, 'shuffle');
-
-        videoPlayer.shufflePlaylist();
-        expect(playlist.shuffle).toHaveBeenCalled();
     });
 });

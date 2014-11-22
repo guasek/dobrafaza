@@ -1,6 +1,9 @@
 var youtubeVideoPlayer = {
     playVideo: function(youtubeId) {}
 };
+var eventDispatcherMock = {
+    publish: function() {}
+};
 var dfAnimateMock = {
     enableVoting: function() {}
 };

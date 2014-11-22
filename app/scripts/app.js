@@ -8,6 +8,7 @@ angular.module('dobraFaza', [
     'ngRoute',
     'adaptive.detection',
     'advertising',
+    'EventPublisher',
     'youtube',
     'videoPlayback',
     'dobrafaza.animations',

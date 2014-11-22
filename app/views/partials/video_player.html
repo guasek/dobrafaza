@@ -59,8 +59,8 @@
             <div class="row">
                 <div class="large-12 columns" ng-controller="VotingController">
                     <div id="voting">
-                        <a ng-click="voter.voteUp(videoPlayer.currentlyPlayed); $dfAnimate.disableVoting();" class="btn cool large-6 medium-6 small-12 columns">Dobra faza <span>({{ videoPlayer.currentlyPlayed.votesUp }})</span></a>
-                        <a ng-click="voter.voteDown(videoPlayer.currentlyPlayed); $dfAnimate.disableVoting();" class="btn shit large-6 medium-6 small-12 columns">Słabe <span>({{ videoPlayer.currentlyPlayed.votesDown }})</span></a>
+                        <a ng-click="voter.voteUp(videoPlayer.currentlyPlayed);" class="btn cool large-6 medium-6 small-12 columns">Dobra faza <span>({{ videoPlayer.currentlyPlayed.votesUp }})</span></a>
+                        <a ng-click="voter.voteDown(videoPlayer.currentlyPlayed);" class="btn shit large-6 medium-6 small-12 columns">Słabe <span>({{ videoPlayer.currentlyPlayed.votesDown }})</span></a>
                     </div>
                     <div id="voted" class="hide">
                         Dzięki! Dzięki! Dzięki Tobie Dobra Faza będzie jeszcze lepsza!<br>

@@ -1,7 +1,7 @@
-/* global VideoRepository, CategoryRepository */
+/* global VideoRepository, CategoryRepository, VideoPlaybackStarted */
 'use strict';
 
-function VideoPlayer(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $cookieStore) {
+function VideoPlayer(youtubeVideoPlayer, $rootScope, $cookieStore, eventPublisher) {
 
     var currentlyPlayed = null;
     var maxSeenMovies = 100;
@@ -12,13 +12,8 @@ function VideoPlayer(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $coo
 
     var playNextVideo = function () {
         this.currentlyPlayed = this.playList.next();
-        $rootScope.video = this.currentlyPlayed;
-
         this.currentlyPlayed.playWith(this);
-        $location.path('/play/' + this.currentlyPlayed.videoId, false);
-
-        $rootScope.$apply();
-        $dfAnimate.enableVoting();
+        $rootScope.video = this.currentlyPlayed;
 
         var seenMovies = $cookieStore.get('seenMovies');
         if (typeof seenMovies === 'undefined' || seenMovies.length > maxSeenMovies) {
@@ -28,16 +23,15 @@ function VideoPlayer(youtubeVideoPlayer, $dfAnimate, $rootScope, $location, $coo
             seenMovies.push(this.currentlyPlayed.videoId);
             $cookieStore.put('seenMovies', seenMovies);
         }
+
+        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
     };
 
     var playPreviousVideo = function () {
         this.currentlyPlayed = this.playList.previous();
-        $rootScope.video = this.currentlyPlayed;
         this.currentlyPlayed.playWith(this);
-
-        $location.path('/play/' + this.currentlyPlayed.videoId, false);
-        $rootScope.$apply();
-        $dfAnimate.enableVoting();
+        $rootScope.video = this.currentlyPlayed;
+        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
     };
 
     var startPlayback = function () {
@@ -79,8 +73,7 @@ angular
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
     .factory('videoPlayer',
         ['youtubePlayerApi',
-         '$dfAnimate',
          '$rootScope',
-         '$location',
          '$cookieStore',
+         'eventPublisher',
          VideoPlayer]);
