@@ -5,10 +5,11 @@
 angular
     .module('dobraFaza')
     .controller('PlaybackController',
-        ['$scope', '$window', '$cookieStore', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
+        ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
          'categoryRepository', 'playerCode', 'ezfb', 'eventPublisher', 'votingEnablingSubscriber',
-         function ($scope, $window, $cookieStore, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber)
+         'seenVideosSubscriber', 'seenVideos',
+         function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
+                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber, seenVideosSubscriber, seenVideos)
         {
             $scope.currentVideo = null;
             $scope.shareToFb = function(video) {
@@ -26,7 +27,7 @@ angular
                     var videos = data[1];
                     var startVideoId = $routeParams.videoId;
 
-                    var seenMoviesFilter = new SeenVideosFilter($cookieStore.get('seenMovies') || []);
+                    var seenMoviesFilter = new SeenVideosFilter(seenVideos);
                     var exclusiveVideoFilter = new ExclusiveVideoFilter(startVideoId);
                     var categoriesFilter = new CategoryVideoFilter(categories);
 
@@ -37,6 +38,7 @@ angular
                     var playList = new PlayList(videos, playlistFilter);
 
                     eventPublisher.subscribe(votingEnablingSubscriber);
+                    eventPublisher.subscribe(seenVideosSubscriber);
 
                     videoPlayer.setPlaylist(playList);
                     videoPlayer.bringVideoToFront(startVideoId);

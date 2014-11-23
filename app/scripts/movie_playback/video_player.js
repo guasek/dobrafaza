@@ -6,15 +6,13 @@
  *
  * @param youtubeVideoPlayer Youtube video player.
  * @param $rootScope         Rootscope object to pass data to template.
- * @param $cookieStore       Cookie store to update seen movies.
  * @param eventPublisher     Event publisher to tell about commands done.
  *
  * @constructor
  */
-function VideoPlayer(youtubeVideoPlayer, $rootScope, $cookieStore, eventPublisher) {
+function VideoPlayer(youtubeVideoPlayer, $rootScope, eventPublisher) {
 
     var currentlyPlayed = null;
-    var maxSeenMovies = 100;
 
     /**
      * Allows to set playlist for the player.
@@ -32,16 +30,6 @@ function VideoPlayer(youtubeVideoPlayer, $rootScope, $cookieStore, eventPublishe
         this.currentlyPlayed = this.playList.next();
         this.currentlyPlayed.playWith(this);
         $rootScope.video = this.currentlyPlayed;
-
-        var seenMovies = $cookieStore.get('seenMovies');
-        if (typeof seenMovies === 'undefined' || seenMovies.length > maxSeenMovies) {
-            seenMovies = [];
-        }
-        if (seenMovies.indexOf(this.currentlyPlayed.videoId) === -1) {
-            seenMovies.push(this.currentlyPlayed.videoId);
-            $cookieStore.put('seenMovies', seenMovies);
-        }
-
         eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
     };
 
@@ -100,9 +88,10 @@ angular
     .module('videoPlayback', [])
     .factory('videoRepository', ['$http', '$q', VideoRepository])
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
+    .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore) }])
+    .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
     .factory('videoPlayer',
         ['youtubePlayerApi',
          '$rootScope',
-         '$cookieStore',
          'eventPublisher',
          VideoPlayer]);

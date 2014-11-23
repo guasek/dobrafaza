@@ -10,9 +10,9 @@
  * @constructor
  */
 function PlayList(videoList, filter) {
-    this.currentItem = -1;
     this.videoList = videoList;
     this.filter = filter;
+    this.playback = new Playback();
 }
 
 /**
@@ -38,56 +38,36 @@ PlayList.create = function (rawVideos, filter) {
 };
 
 /**
- * Shuffles videos on the list.
- */
-PlayList.prototype.shuffle = function () {
-    var currentIndex = this.videoList.length;
-    var temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        temporaryValue = this.videoList[currentIndex];
-        this.videoList[currentIndex] = this.videoList[randomIndex];
-        this.videoList[randomIndex] = temporaryValue;
-    }
-    this.currentItem = 0;
-};
-
-/**
  * Fetches next video from the list.
  *
  * @return {Video}
  */
 PlayList.prototype.next = function () {
-    var selectedMovie;
-    do {
-        this.currentItem++;
-        selectedMovie = this.videoList[this.currentItem];
-    } while(!this.filter.shouldPlay(selectedMovie));
-    return selectedMovie;
+    if (this.playback.isRewound()) {
+        return this.playback.fastForward();
+    }
+    for (var i = 0; i < this.videoList.length; i++) {
+
+        var currentVideo = this.videoList[i];
+        if (this.filter.shouldPlay(currentVideo)) {
+
+            var firstVideosPart = this.videoList.slice(0, i);
+            var secondVideosPart = this.videoList.slice(i + 1);
+            this.videoList = [].concat(firstVideosPart, secondVideosPart);
+
+            this.playback.nowPlaying(currentVideo);
+            return currentVideo;
+        }
+    }
 };
 
 /**
- *
- *
  * Fetches previous video from the list.
  *
  * @return {Video}
  */
 PlayList.prototype.previous = function () {
-    var selectedMovie;
-    do {
-        if (this.currentItem > 0) {
-            this.currentItem--;
-        } else {
-            break;
-        }
-        selectedMovie = this.videoList[this.currentItem];
-    } while(!this.filter.shouldPlay(selectedMovie));
-    return selectedMovie;
+    return this.playback.rewind();
 };
 
 /**
@@ -105,3 +85,54 @@ PlayList.prototype.bringVideoToFront = function(videoId) {
         }
     }
 };
+
+/**
+ * Manages videos that has been played.
+ *
+ * @constructor
+ */
+function Playback() {
+    this.playedVideos = [];
+    this.currentlyWatched = -1;
+}
+
+/**
+ * Adds given video to history.
+ *
+ * @param video Video to be managed in history.
+ */
+Playback.prototype.nowPlaying = function (video) {
+    if (this.playedVideos.indexOf(video) === -1) {
+        this.playedVideos.push(video);
+        this.currentlyWatched += 1;
+    }
+}
+
+/**
+ * Tells whether history has been rewound.
+ *
+ * @return {boolean}
+ */
+Playback.prototype.isRewound = function () {
+    return this.playedVideos.length - 1 !== this.currentlyWatched;
+}
+
+/**
+ * Fetches video from history.
+ *
+ * @return {Video}
+ */
+Playback.prototype.rewind = function () {
+    this.currentlyWatched -= 1;
+    return this.playedVideos[this.currentlyWatched];
+}
+
+/**
+ * Goes forward in playback history.
+ *
+ * @return {Video}
+ */
+Playback.prototype.fastForward = function () {
+    this.currentlyWatched += 1;
+    return this.playedVideos[this.currentlyWatched];
+}

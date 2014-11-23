@@ -33,15 +33,12 @@ CategoryVideoFilter.prototype.shouldPlay = function (video) {
  * Seen movies playlist filter. Can filter movies basing on the fact whether
  * they've been seen or not.
  *
- * @param {Array} seenMovies
+ * @param {SeenVideos} seenVideos
  *
  * @constructor
  */
-function SeenVideosFilter(seenMovies) {
-    if (!Array.isArray(seenMovies)) {
-        throw new Error('You have to pass a list of movies');
-    }
-    this.seenMoviesIds = seenMovies;
+function SeenVideosFilter(seenVideos) {
+    this.seenVideos = seenVideos;
 }
 
 /**
@@ -52,13 +49,7 @@ function SeenVideosFilter(seenMovies) {
  * @return {boolean}
  */
 SeenVideosFilter.prototype.shouldPlay = function (video) {
-    for(var index = 0; index < this.seenMoviesIds.length; index++) {
-        var comparedId = this.seenMoviesIds[index];
-        if (video.idEquals(comparedId)) {
-            return false;
-        }
-    }
-    return true;
+    return !this.seenVideos.contains(video.videoId);
 };
 
 /**

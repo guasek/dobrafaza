@@ -20,3 +20,19 @@ var cookieStoreMock = {
 var filterStub = {
     shouldPlay: function(){return true;}
 };
+
+function cookieStoreStub () {
+    var videos = [];
+
+    var get = function() {
+        return videos;
+    };
+    var put = function (v) {
+        videos = v;
+    };
+
+    return {
+        get: get,
+        put: put
+    };
+};
