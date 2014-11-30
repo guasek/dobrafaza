@@ -9,6 +9,38 @@ var should = require('should'),
 
 describe('Videos api', function() {
 
+    it('PUT /api/videos Save Video along with the changes made.', function(done) {
+        Video.remove({}, function(){});
+        var vendorId = 'asdasdsa';
+        request(app)
+            .put('/api/videos')
+            .send({vendorId: vendorId})
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end(function(err, res) {
+                if (err) return done(err);
+
+                var savedVid = res.body;
+                savedVid._id.length.should.be.equal(24);
+                savedVid.vendorId.should.equal(vendorId);
+                savedVid.categories.length.should.equal(0);
+
+                var categoryId = 'adscxzzczx';
+                savedVid.categories.push(categoryId);
+
+                request(app)
+                    .put('/api/videos')
+                    .send(savedVid)
+                    .expect(200)
+                    .end(function(err, res) {
+                        var sameVid = res.body;
+                        sameVid._id.should.equal(savedVid._id);
+                        sameVid.categories[0].should.equal(categoryId);
+                        done();
+                    })
+            });
+    });
+
     it('GET /api/videos should respond with JSON array', function(done) {
         Video.remove({}, function(){});
         ['oukX49mJppM', 'Yz1rfDY-wlg', 'KRwDTj-Rcmk', 'ca1nQa2Feb0'].map(function(videoId) {
