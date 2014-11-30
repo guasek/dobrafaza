@@ -127,11 +127,18 @@ function VideoRepository($http, $q) {
      * @param {Video} video Video to be stored.
      */
     var store = function (video) {
-        var youtubeRegex = /^.*v=([^#\&\?]*).*/;
-        var youtubeId = youtubeRegex.exec(video.url, 'i');
-        $http.put('/api/videos', {title: video.title, videoId: youtubeId[1], vendorId: 1})
-            .success(function (responseData){
-                video.addedVideoId = responseData._id;
+        $http
+            .put('/api/videos', {
+                _id: video.videoId,
+                videoId: video.vendorVideoId,
+                vendorId: 1,
+                title: video.title,
+                votesUp: video.votesUp,
+                votesDown: video.votesDown,
+                categories: video.categories
+            })
+            .success(function (storedVideo){
+                video.videoId = storedVideo._id;
             });
     };
 
@@ -140,4 +147,46 @@ function VideoRepository($http, $q) {
         fetchVideosChunk: fetchVideosChunk,
         store: store
     };
+}
+
+function VideoFactory () {
+
+    var youtubeRegex = /^.*v=([^#\&\?]*).*/;
+
+    var videoPreProducts = {
+        title: '',
+        url: '',
+        categories: []
+    };
+
+    var useCategories = function (categories) {
+        videoPreProducts.categories = categories;
+    };
+
+    var videoFromPreProducts = function () {
+        var selectedCategories = [];
+        for (var index = 0; index < videoPreProducts.categories.length; index++) {
+            var category = videoPreProducts.categories[index];
+            if (category.isActive()) {
+                selectedCategories.push(category.id);
+            }
+        }
+        if (selectedCategories.length === 0) {
+            throw new Error('Assign at least one category.');
+        }
+
+        var youtubeId = youtubeRegex.exec(videoPreProducts.url, 'i')[1];
+        var createdVideo = new Video(null, youtubeId, videoPreProducts.title, 0, 0, selectedCategories);
+
+        videoPreProducts.title = '';
+        videoPreProducts.url = '';
+
+        return createdVideo;
+    };
+
+    return {
+        videoPreProducts: videoPreProducts,
+        useCategories: useCategories,
+        videoFromPreProducts: videoFromPreProducts
+    }
 }

@@ -10,6 +10,38 @@ describe('Video test', function () {
         player = videoPlayer;
     }))
 
+    it('Should create youtube videos from pre products in factory', function () {
+        var title = 'Title';
+        var url = 'https://www.youtube.com/watch?v=CaWHAgATcxU';
+
+        var videoFactory = new VideoFactory();
+        videoFactory.videoPreProducts.title = title;
+        videoFactory.videoPreProducts.url = url;
+
+        expect(videoFactory.videoFromPreProducts).toThrow();
+
+        var categories = [new Category(1, 'first', false)];
+        videoFactory.useCategories(categories);
+
+        expect(videoFactory.videoFromPreProducts).toThrow();
+
+        categories.push(new Category(2, 'second', true));
+        categories.push(new Category(3, 'third', true));
+        videoFactory.useCategories(categories);
+
+        var createdVideo = videoFactory.videoFromPreProducts();
+
+        expect(createdVideo.title).toEqual(title);
+        expect(createdVideo.videoId).toEqual(null);
+        expect(createdVideo.vendorVideoId).toEqual('CaWHAgATcxU');
+        expect(createdVideo.votesUp).toEqual(0);
+        expect(createdVideo.votesDown).toEqual(0);
+        expect(createdVideo.categories[0].idEquals(2)).toBeTruthy();
+        expect(createdVideo.categories[1].idEquals(3)).toBeTruthy();
+
+        expect(videoFactory.videoFromPreProducts).toThrow();
+    });
+
     it('Should be playable by videoplayer', function () {
         spyOn(player, 'playYoutubeVideo');
         var video = Video.youtubeVideo('oukX49mJppM', 'oukX49mJppM', "Title", 0, 0);

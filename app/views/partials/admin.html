@@ -1,10 +1,22 @@
-<form name="adminForm" novalidate class="new-video-form">
-    Tytuł filmu: <input class="admin-input-vid" type="text" ng-model="video.title"/><br/>
-    PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="video.url" ng-minlength="5"/>
-    <div
-            data-ng-hide="video.addedVideoId.length === 0 || video.url.length !== 0"
-            >Dodano filmik, link bezpośredni: {{baseUrl}}/play/{{video.addedVideoId}}</div><br />
-    <button ng-disable="adminForm.$invalid || adminForm.$pristine" ng-click="videoRepository.store(video); video.url = '';">DODAJ FILMIK</button>
+<form name="adminForm" novalidate class="new-video-form" xmlns="http://www.w3.org/1999/html">
+    Tytuł filmu: <input class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.title"/><br/>
+    PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.url" ng-minlength="5"/>
+    <br />
+    <button
+            ng-disable="adminForm.$invalid || adminForm.$pristine"
+            ng-click="
+            videoRepository.store(videoFactory.videoFromPreProducts());
+            pageChanged(pagination.current);
+            ">DODAJ FILMIK DO FAZY
+    </button>
+    <br/>
+    <label ng-repeat="category in videoFactory.videoPreProducts.categories">
+        <input
+                type="checkbox"
+                ng-model="category.turnedOn"
+                > {{category.name}}
+        </input>
+    </label>
 </form>
 
 <table>
