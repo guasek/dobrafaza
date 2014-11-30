@@ -2,6 +2,16 @@
 
 angular.module('dobraFaza')
     .controller('AdminController', ['$scope', '$http', '$window', 'videoRepository', function ($scope, $http, $window, videoRepository) {
+
+        //TODO: Przenieść do repozytorium, skorzystać z $q
+        function getResultsPage(pageNumber) {
+            $http.get('api/videos?per_page=' + $scope.videosPerPage + '&page=' + pageNumber)
+                .then(function(result) {
+                    $scope.paginatedVideos = result.data.videos;
+                    $scope.totalVideos = result.data.videosCount;
+                });
+        }
+
         $scope.video = {
             title: '',
             url: '',
@@ -22,13 +32,4 @@ angular.module('dobraFaza')
         $scope.pageChanged = function(newPage) {
             getResultsPage(newPage);
         };
-
-        //TODO: Przenieść do repozytorium, skorzystać z $q
-        function getResultsPage(pageNumber) {
-            $http.get('api/videos?per_page=' + $scope.videosPerPage + '&page=' + pageNumber)
-                .then(function(result) {
-                    $scope.paginatedVideos = result.data.videos;
-                    $scope.totalVideos = result.data.videosCount;
-            });
-        }
     }]);

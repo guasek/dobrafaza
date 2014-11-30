@@ -2,6 +2,57 @@
 /* global Video */
 
 /**
+ * Manages videos that has been played.
+ *
+ * @constructor
+ */
+function Playback() {
+    this.playedVideos = [];
+    this.currentlyWatched = -1;
+}
+
+/**
+ * Adds given video to history.
+ *
+ * @param video Video to be managed in history.
+ */
+Playback.prototype.nowPlaying = function (video) {
+    if (this.playedVideos.indexOf(video) === -1) {
+        this.playedVideos.push(video);
+        this.currentlyWatched += 1;
+    }
+};
+
+/**
+ * Tells whether history has been rewound.
+ *
+ * @return {boolean}
+ */
+Playback.prototype.isRewound = function () {
+    return this.playedVideos.length - 1 !== this.currentlyWatched;
+};
+
+/**
+ * Fetches video from history.
+ *
+ * @return {Video}
+ */
+Playback.prototype.rewind = function () {
+    this.currentlyWatched -= 1;
+    return this.playedVideos[this.currentlyWatched];
+};
+
+/**
+ * Goes forward in playback history.
+ *
+ * @return {Video}
+ */
+Playback.prototype.fastForward = function () {
+    this.currentlyWatched += 1;
+    return this.playedVideos[this.currentlyWatched];
+};
+
+/**
  * Playlist object definition. Holds list of videos, can apply filters to them.
  *
  * @param {Array}       videoList List of videos for the playlist.
@@ -85,54 +136,3 @@ PlayList.prototype.bringVideoToFront = function(videoId) {
         }
     }
 };
-
-/**
- * Manages videos that has been played.
- *
- * @constructor
- */
-function Playback() {
-    this.playedVideos = [];
-    this.currentlyWatched = -1;
-}
-
-/**
- * Adds given video to history.
- *
- * @param video Video to be managed in history.
- */
-Playback.prototype.nowPlaying = function (video) {
-    if (this.playedVideos.indexOf(video) === -1) {
-        this.playedVideos.push(video);
-        this.currentlyWatched += 1;
-    }
-}
-
-/**
- * Tells whether history has been rewound.
- *
- * @return {boolean}
- */
-Playback.prototype.isRewound = function () {
-    return this.playedVideos.length - 1 !== this.currentlyWatched;
-}
-
-/**
- * Fetches video from history.
- *
- * @return {Video}
- */
-Playback.prototype.rewind = function () {
-    this.currentlyWatched -= 1;
-    return this.playedVideos[this.currentlyWatched];
-}
-
-/**
- * Goes forward in playback history.
- *
- * @return {Video}
- */
-Playback.prototype.fastForward = function () {
-    this.currentlyWatched += 1;
-    return this.playedVideos[this.currentlyWatched];
-}

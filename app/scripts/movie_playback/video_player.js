@@ -1,4 +1,4 @@
-/* global VideoRepository, CategoryRepository, VideoPlaybackStarted */
+/* global VideoRepository, CategoryRepository, VideoPlaybackStarted, SeenVideos, SeenVideosSubscriber*/
 'use strict';
 
 /**
@@ -88,7 +88,7 @@ angular
     .module('videoPlayback', [])
     .factory('videoRepository', ['$http', '$q', VideoRepository])
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
-    .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore) }])
+    .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore); }])
     .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
     .factory('videoPlayer',
         ['youtubePlayerApi',

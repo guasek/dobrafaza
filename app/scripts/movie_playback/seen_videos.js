@@ -1,3 +1,7 @@
+/* global VideoPlaybackStarted */
+/* exported SeenVideosSubscriber */
+'use strict';
+
 /**
  * Stores seen movies .
  *
@@ -65,7 +69,7 @@ function SeenVideosSubscriber(seenVideos) {
      * @param event Event to be handled
      */
     var handle = function (event) {
-        seenVideos.add(event.videoId)
+        seenVideos.add(event.videoId);
     };
 
     return {
