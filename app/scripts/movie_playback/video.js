@@ -67,6 +67,47 @@ Video.youtubeVideo = function(videoId, youtubeId, title, votesUp, votesDown, cat
 function VideoRepository($http, $q) {
 
     /**
+     * Reconstructs all fetched videos.
+     *
+     * @param rawVideos Videos fetched from server.
+     *
+     * @return {Array}
+     */
+    var reconstructAllVideos = function(rawVideos) {
+        var videos = [];
+        for (var index=0; index<rawVideos.length; index++) {
+            var rawVideo = rawVideos[index];
+            videos.push(new Video(
+                rawVideo._id,
+                rawVideo.videoId,
+                rawVideo.title,
+                rawVideo.votesUp,
+                rawVideo.votesDown,
+                rawVideo.categories
+            ));
+        }
+        return videos;
+    }
+
+    /**
+     * Fetches single chunk of videos. Returns promise.
+     *
+     * @param {Number} pageNumber Number of the page to be fetched.
+     * @param {Number} chunkSize  How many videos per page to fetch.
+     *
+     * @return {Promise.promise|*}
+     */
+    var fetchVideosChunk = function (pageNumber, chunkSize) {
+        var deferred = $q.defer();
+        $http.get('api/videos?per_page=' + chunkSize + '&page=' + pageNumber)
+            .success(function(rawData) {
+                var videos = reconstructAllVideos(rawData.videos);
+                deferred.resolve({'videos': videos, 'videosCount': rawData.videosCount});
+            });
+        return deferred.promise;
+    };
+
+    /**
      * Fetches all available videos from backend.
      *
      * @return {Array}
@@ -74,23 +115,17 @@ function VideoRepository($http, $q) {
     var fetchAll = function () {
         var deferred = $q.defer();
         $http.get('/api/videos').success(function(rawVideos) {
-            var videos = [];
-            for (var index=0; index<rawVideos.length; index++) {
-                var rawVideo = rawVideos[index];
-                videos.push(new Video(
-                    rawVideo._id,
-                    rawVideo.videoId,
-                    rawVideo.title,
-                    rawVideo.votesUp,
-                    rawVideo.votesDown,
-                    rawVideo.categories
-                ));
-            }
+            var videos = reconstructAllVideos(rawVideos);
             deferred.resolve(videos);
         });
         return deferred.promise;
     };
 
+    /**
+     * Stores given video in backend.
+     *
+     * @param {Video} video Video to be stored.
+     */
     var store = function (video) {
         var youtubeRegex = /^.*v=([^#\&\?]*).*/;
         var youtubeId = youtubeRegex.exec(video.url, 'i');
@@ -102,6 +137,7 @@ function VideoRepository($http, $q) {
 
     return {
         fetchAll: fetchAll,
+        fetchVideosChunk: fetchVideosChunk,
         store: store
     };
 }

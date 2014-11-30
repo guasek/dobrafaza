@@ -9,9 +9,9 @@
 
 <table>
     <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 25" total-items="totalVideos">
-        <td><img src="http://i1.ytimg.com/vi/{{pVideo.videoId}}/default.jpg" width="120" height="90" /></td>
+        <td><img src="http://i1.ytimg.com/vi/{{pVideo.vendorVideoId}}/default.jpg" width="120" height="90" /></td>
         <td>{{ pVideo.title }}</td>
-        <td><a href="/play/{{pVideo._id}}">Link do filmu</a></td>
+        <td><a href="/play/{{pVideo.videoId}}">Link do filmu</a></td>
     </tr>
 </table>
 

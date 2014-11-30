@@ -2,16 +2,6 @@
 
 angular.module('dobraFaza')
     .controller('AdminController', ['$scope', '$http', '$window', 'videoRepository', function ($scope, $http, $window, videoRepository) {
-
-        //TODO: Przenieść do repozytorium, skorzystać z $q
-        function getResultsPage(pageNumber) {
-            $http.get('api/videos?per_page=' + $scope.videosPerPage + '&page=' + pageNumber)
-                .then(function(result) {
-                    $scope.paginatedVideos = result.data.videos;
-                    $scope.totalVideos = result.data.videosCount;
-                });
-        }
-
         $scope.video = {
             title: '',
             url: '',
@@ -23,7 +13,15 @@ angular.module('dobraFaza')
         $scope.paginatedVideos = [];
         $scope.totalVideos = 1;
         $scope.videosPerPage = 25;
-        getResultsPage(1);
+
+        function getResultsPage(pageNumber) {
+            return videoRepository.fetchVideosChunk(pageNumber, $scope.videosPerPage).then(function (videosData) {
+                $scope.paginatedVideos = videosData.videos;
+                $scope.totalVideos = videosData.videosCount;
+            });
+        }
+
+        getResultsPage(1)
 
         $scope.pagination = {
             current: 1
