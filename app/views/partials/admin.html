@@ -6,3 +6,13 @@
             >Dodano filmik, link bezpośredni: {{baseUrl}}/play/{{video.addedVideoId}}</div><br />
     <button ng-disable="adminForm.$invalid || adminForm.$pristine" ng-click="videoRepository.store(video); video.url = '';">DODAJ FILMIK</button>
 </form>
+
+<table>
+    <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 25" total-items="totalVideos">
+        <td><img src="http://i1.ytimg.com/vi/{{pVideo.videoId}}/default.jpg" width="120" height="90" /></td>
+        <td>{{ pVideo.title }}</td>
+        <td><a href="/play/{{pVideo._id}}">Link do filmu</a></td>
+    </tr>
+</table>
+
+<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

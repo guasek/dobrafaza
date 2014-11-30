@@ -7,7 +7,8 @@ var testVideos = [
         title: 'Test 1',
         votesUp: 0,
         votesDown: 0,
-        categories: []
+        categories: [],
+        createdAt: new Date(2014,1,1,12,12,10)
     },
     {
         _id: 'KRwDTj-Rcmk',
@@ -15,7 +16,8 @@ var testVideos = [
         title: 'Test 2',
         votesUp: 0,
         votesDown: 0,
-        categories: [1, 2]
+        categories: [1, 2],
+        createdAt: new Date(2014,1,1,12,12,11)
     },
     {
         _id: 'ca1nQa2Feb0',
@@ -23,7 +25,8 @@ var testVideos = [
         title: 'Test 3',
         votesUp: 0,
         votesDown: 0,
-        categories: [2]
+        categories: [2],
+        createdAt: new Date(2014,1,1,12,12,12)
     },
     {
         _id: 'Yz1rfDY-wlg',
@@ -31,6 +34,7 @@ var testVideos = [
         title: 'Test 4',
         votesUp: 0,
         votesDown: 0,
-        categories: [1]
+        categories: [1],
+        createdAt: new Date(2014,1,1,12,12,13)
     }
 ];

@@ -65,6 +65,7 @@ Video.youtubeVideo = function(videoId, youtubeId, title, votesUp, votesDown, cat
  * @constructor
  */
 function VideoRepository($http, $q) {
+
     /**
      * Fetches all available videos from backend.
      *

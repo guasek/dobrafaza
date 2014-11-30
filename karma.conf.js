@@ -19,6 +19,7 @@ module.exports = function(config) {
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-easyfb/angular-easyfb.js',
       'app/bower_components/angular-adaptive-detection/angular-adaptive-detection.min.js',
+      'app/bower_components/angular-utils-pagination/dirPagination.js',
       'app/scripts/voting/voting_controller.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',

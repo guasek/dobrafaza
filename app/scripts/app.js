@@ -7,6 +7,7 @@ angular.module('dobraFaza', [
     'ngSanitize',
     'ngRoute',
     'adaptive.detection',
+    'angularUtils.directives.dirPagination',
     'advertising',
     'EventPublisher',
     'youtube',
@@ -34,6 +35,9 @@ angular.module('dobraFaza', [
         redirectTo: '/'
     });
     $locationProvider.html5Mode(true);
+})
+.config(function(paginationTemplateProvider) {
+    paginationTemplateProvider.setPath('partials/pagination.tpl.html');
 })
 .config(function (ezfbProvider) {
     ezfbProvider.setInitParams({
