@@ -36,8 +36,8 @@ describe('Video test', function () {
         expect(createdVideo.vendorVideoId).toEqual('CaWHAgATcxU');
         expect(createdVideo.votesUp).toEqual(0);
         expect(createdVideo.votesDown).toEqual(0);
-        expect(createdVideo.categories[0].idEquals(2)).toBeTruthy();
-        expect(createdVideo.categories[1].idEquals(3)).toBeTruthy();
+        expect(createdVideo.categories[0]).toEqual(2);
+        expect(createdVideo.categories[1]).toEqual(3);
 
         expect(videoFactory.videoFromPreProducts).toThrow();
     });
@@ -50,7 +50,7 @@ describe('Video test', function () {
         expect(player.playYoutubeVideo).toHaveBeenCalledWith('oukX49mJppM')
     });
 
-    it('Can tell whether it belongs to category.', function () {
+    it('Can be added, deleted and tell whether it belongs to category.', function () {
         var categoryId = 'zxdfsgdsvcxv';
 
         var video = Video.youtubeVideo('oukX49mJppM', 'oukX49mJppM', "Title", 0, 0, [categoryId]);
@@ -60,6 +60,20 @@ describe('Video test', function () {
 
         expect(video.belongsTo(belongCategory)).toBeTruthy();
         expect(video.belongsTo(dontBelongCategory)).toBeFalsy();
+
+        var nextCategory = new Category('newCat', 'It belongs to it', true);
+
+        video.addTo(nextCategory);
+        expect(video.belongsTo(nextCategory)).toBeTruthy();
+
+        video.addTo(nextCategory);
+        expect(video.categories.length).toEqual(2);
+
+        video.removeFrom(nextCategory);
+
+        expect(video.belongsTo(belongCategory)).toBeTruthy();
+        expect(video.belongsTo(dontBelongCategory)).toBeFalsy();
+        expect(video.belongsTo(nextCategory)).toBeFalsy();
     });
 
     it('Can tell whether given id equals its own one.', function () {

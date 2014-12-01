@@ -19,14 +19,24 @@ angular.module('dobraFaza')
                 current: 1
             };
 
+            $scope.changeVideoCategoryBelonging = function($event, video, category) {
+                if ($event.target.checked) {
+                    video.addTo(category);
+                } else {
+                    video.removeFrom(category);
+                }
+            }
+
             categoryRepository.fetchAll().then(function (categories) {
                 videoFactory.useCategories(categories);
+                $scope.categories = categories;
             });
 
             function getResultsPage(pageNumber) {
                 return videoRepository.fetchVideosChunk(pageNumber, $scope.videosPerPage).then(function (videosData) {
                     $scope.paginatedVideos = videosData.videos;
                     $scope.totalVideos = videosData.videosCount;
+                    $scope.pagination.current = pageNumber;
                 });
             }
 

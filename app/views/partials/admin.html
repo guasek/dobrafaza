@@ -17,12 +17,40 @@
                 > {{category.name}}
         </input>
     </label>
-</form>
+</form><br/>
 
 <table>
     <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 25" total-items="totalVideos">
         <td><img src="http://i1.ytimg.com/vi/{{pVideo.vendorVideoId}}/default.jpg" width="120" height="90" /></td>
-        <td>{{ pVideo.title }}</td>
+        <td>
+            <form name="videoModifyForm" novalidate class="modify-video-form">
+                <input class="admin-input-vid" size="50" type="text" ng-model="pVideo.title"/><br/>
+                <label ng-repeat="category in categories">
+                    <input
+                            type="checkbox"
+                            ng-checked="pVideo.belongsTo(category)"
+                            ng-true-value="add"
+                            ng-false-value="remove"
+                            ng-click="changeVideoCategoryBelonging($event, pVideo, category)"
+                            > {{category.name}}
+                    </input>
+                </label><br/>
+                <button
+                        ng-disable="adminForm.$invalid || adminForm.$pristine"
+                        ng-click="
+                            videoRepository.store(pVideo);
+                            pageChanged(pagination.current);
+                        ">Zapisz
+                </button>
+                <button
+                        ng-disable="adminForm.$invalid || adminForm.$pristine"
+                        ng-click="
+                            videoRepository.remove(pVideo);
+                            pageChanged(pagination.current);
+                        ">Usuń film
+                </button>
+            </form>
+        </td>
         <td><a href="/play/{{pVideo.videoId}}">Link do filmu</a></td>
     </tr>
 </table>

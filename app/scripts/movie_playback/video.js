@@ -36,6 +36,30 @@ Video.prototype.belongsTo = function(checkedCategory) {
 };
 
 /**
+ * Adds video to a category.
+ *
+ * @param {Category} category to be added to.
+ */
+Video.prototype.addTo = function(category) {
+    if (this.belongsTo(category)) {
+        return;
+    }
+    this.categories.push(category.id);
+};
+
+/**
+ * Removes video from a category.
+ *
+ * @param {Category} category to be removed from.
+ */
+Video.prototype.removeFrom = function(category) {
+    if(!this.belongsTo(category)) {
+        return;
+    }
+    this.categories.splice(this.categories.indexOf(category.id), 1);
+}
+
+/**
  * Tells whether compared id equals video's one.
  *
  * @param {Integer} comparedId
@@ -142,9 +166,19 @@ function VideoRepository($http, $q) {
             });
     };
 
+    /**
+     * Removes a video.
+     *
+     * @param {Video} video Video to be removed.
+     */
+    var remove = function (video) {
+        $http.delete('/api/videos/' + video.videoId);
+    }
+
     return {
         fetchAll: fetchAll,
         fetchVideosChunk: fetchVideosChunk,
+        remove: remove,
         store: store
     };
 }
