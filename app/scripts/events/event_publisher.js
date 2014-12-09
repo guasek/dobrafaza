@@ -25,6 +25,11 @@ EventPublisher.prototype.publish = function(event) {
     }
 };
 
+/**
+ * Uses following user subscriber.
+ *
+ * @param eventSubscriber
+ */
 EventPublisher.prototype.subscribe = function(eventSubscriber) {
     this.subscribers.push(eventSubscriber);
 };

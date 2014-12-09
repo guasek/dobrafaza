@@ -1,4 +1,4 @@
-/* exported VideoRepository */
+/* exported VideoRepository, VideoFactory */
 'use strict';
 
 function Video(videoId, vendorVideoId, title, votesUp, votesDown, categories) {
@@ -57,7 +57,7 @@ Video.prototype.removeFrom = function(category) {
         return;
     }
     this.categories.splice(this.categories.indexOf(category.id), 1);
-}
+};
 
 /**
  * Tells whether compared id equals video's one.
@@ -111,7 +111,7 @@ function VideoRepository($http, $q) {
             ));
         }
         return videos;
-    }
+    };
 
     /**
      * Fetches single chunk of videos. Returns promise.
@@ -173,7 +173,7 @@ function VideoRepository($http, $q) {
      */
     var remove = function (video) {
         $http.delete('/api/videos/' + video.videoId);
-    }
+    };
 
     return {
         fetchAll: fetchAll,
@@ -183,6 +183,9 @@ function VideoRepository($http, $q) {
     };
 }
 
+/**
+ * Video factory. Creates videos from preproducts.
+ */
 function VideoFactory () {
 
     var youtubeRegex = /^.*v=([^#\&\?]*).*/;
@@ -193,10 +196,20 @@ function VideoFactory () {
         categories: []
     };
 
+    /**
+     * Allows to use following categories.
+     *
+     * @param categories
+     */
     var useCategories = function (categories) {
         videoPreProducts.categories = categories;
     };
 
+    /**
+     * Creates video from preproducts.
+     *
+     * @return {Video}
+     */
     var videoFromPreProducts = function () {
         var selectedCategories = [];
         for (var index = 0; index < videoPreProducts.categories.length; index++) {
@@ -222,5 +235,5 @@ function VideoFactory () {
         videoPreProducts: videoPreProducts,
         useCategories: useCategories,
         videoFromPreProducts: videoFromPreProducts
-    }
+    };
 }

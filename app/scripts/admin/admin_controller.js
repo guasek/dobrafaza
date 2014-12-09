@@ -1,3 +1,4 @@
+/* global VideoFactory */
 'use strict';
 
 angular.module('dobraFaza')
@@ -9,7 +10,7 @@ angular.module('dobraFaza')
         'categoryRepository', function ($scope, $http, $window, videoRepository, categoryRepository) {
             var videoFactory = new VideoFactory();
             $scope.videoRepository = videoRepository;
-            $scope.videoFactory = videoFactory
+            $scope.videoFactory = videoFactory;
             $scope.baseUrl = $window.location.host;
 
             $scope.paginatedVideos = [];
@@ -25,7 +26,7 @@ angular.module('dobraFaza')
                 } else {
                     video.removeFrom(category);
                 }
-            }
+            };
 
             categoryRepository.fetchAll().then(function (categories) {
                 videoFactory.useCategories(categories);
@@ -45,4 +46,5 @@ angular.module('dobraFaza')
             $scope.pageChanged = function(newPage) {
                 getResultsPage(newPage);
             };
-    }]);
+        }
+    ]);

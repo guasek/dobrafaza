@@ -7,11 +7,11 @@ angular
     .controller('PlaybackController',
         ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
          'categoryRepository', 'playerCode', 'ezfb', 'eventPublisher', 'votingEnablingSubscriber',
-         'seenVideosSubscriber', 'seenVideos',
+         'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber',
          function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber, seenVideosSubscriber, seenVideos)
+                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber, seenVideosSubscriber, seenVideos,
+                   uiRefreshSubscriber)
         {
-            $scope.currentVideo = null;
             $scope.shareToFb = function(video) {
                 ezfb.ui(
                     {
@@ -39,6 +39,7 @@ angular
 
                     eventPublisher.subscribe(votingEnablingSubscriber);
                     eventPublisher.subscribe(seenVideosSubscriber);
+                    eventPublisher.subscribe(uiRefreshSubscriber);
 
                     videoPlayer.setPlaylist(playList);
                     videoPlayer.bringVideoToFront(startVideoId);
@@ -47,6 +48,15 @@ angular
                     $scope.videoPlayer = videoPlayer;
 
                     videoPlayer.startPlayback();
+
+                    angular.element($window).on('keyup' , function (e) {
+                        if (e.keyCode === 37) {
+                            videoPlayer.playPreviousVideo();
+                        }
+                        if (e.keyCode ===  39) {
+                            videoPlayer.playNextVideo();
+                        }
+                    });
                 });
             };
             playerCode.loadYoutubeScript();

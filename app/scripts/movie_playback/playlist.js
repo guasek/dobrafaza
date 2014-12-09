@@ -6,7 +6,7 @@
  *
  * @constructor
  */
-function Playback() {
+function PlaybackControls() {
     this.playedVideos = [];
     this.currentlyWatched = -1;
 }
@@ -16,7 +16,7 @@ function Playback() {
  *
  * @param video Video to be managed in history.
  */
-Playback.prototype.nowPlaying = function (video) {
+PlaybackControls.prototype.nowPlaying = function (video) {
     if (this.playedVideos.indexOf(video) === -1) {
         this.playedVideos.push(video);
         this.currentlyWatched += 1;
@@ -28,7 +28,7 @@ Playback.prototype.nowPlaying = function (video) {
  *
  * @return {boolean}
  */
-Playback.prototype.isRewound = function () {
+PlaybackControls.prototype.isRewound = function () {
     return this.playedVideos.length - 1 !== this.currentlyWatched;
 };
 
@@ -37,7 +37,7 @@ Playback.prototype.isRewound = function () {
  *
  * @return {Video}
  */
-Playback.prototype.rewind = function () {
+PlaybackControls.prototype.rewind = function () {
     this.currentlyWatched -= 1;
     return this.playedVideos[this.currentlyWatched];
 };
@@ -47,7 +47,7 @@ Playback.prototype.rewind = function () {
  *
  * @return {Video}
  */
-Playback.prototype.fastForward = function () {
+PlaybackControls.prototype.fastForward = function () {
     this.currentlyWatched += 1;
     return this.playedVideos[this.currentlyWatched];
 };
@@ -63,7 +63,7 @@ Playback.prototype.fastForward = function () {
 function PlayList(videoList, filter) {
     this.videoList = videoList;
     this.filter = filter;
-    this.playback = new Playback();
+    this.playbackControls = new PlaybackControls();
 }
 
 /**
@@ -94,8 +94,8 @@ PlayList.create = function (rawVideos, filter) {
  * @return {Video}
  */
 PlayList.prototype.next = function () {
-    if (this.playback.isRewound()) {
-        return this.playback.fastForward();
+    if (this.playbackControls.isRewound()) {
+        return this.playbackControls.fastForward();
     }
     for (var i = 0; i < this.videoList.length; i++) {
 
@@ -106,7 +106,7 @@ PlayList.prototype.next = function () {
             var secondVideosPart = this.videoList.slice(i + 1);
             this.videoList = [].concat(firstVideosPart, secondVideosPart);
 
-            this.playback.nowPlaying(currentVideo);
+            this.playbackControls.nowPlaying(currentVideo);
             return currentVideo;
         }
     }
@@ -118,7 +118,7 @@ PlayList.prototype.next = function () {
  * @return {Video}
  */
 PlayList.prototype.previous = function () {
-    return this.playback.rewind();
+    return this.playbackControls.rewind();
 };
 
 /**

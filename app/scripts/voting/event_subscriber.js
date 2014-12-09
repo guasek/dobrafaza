@@ -13,7 +13,7 @@
 function VotingEnablingSubscriber(animationService, locationService) {
 
     /**
-     * Tells wheter subsciber subscribes to an event.
+     * Tells whether subscriber subscribes to an event.
      *
      * @param event Event to be handled
      *

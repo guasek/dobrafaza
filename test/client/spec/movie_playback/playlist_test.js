@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Playlist and Playback tests', function () {
+describe('Playlist and PlaybackControls tests', function () {
 
     // load the controller's module
     beforeEach(module('dobraFaza'));
 
     it('Should be able to traverse played videos forth and backwards.', function () {
-        var playback = new Playback();
+        var playback = new PlaybackControls();
 
         playback.nowPlaying(testVideos[0]);
         playback.nowPlaying(testVideos[0]);

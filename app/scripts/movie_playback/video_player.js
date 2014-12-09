@@ -1,16 +1,16 @@
-/* global VideoRepository, CategoryRepository, VideoPlaybackStarted, SeenVideos, SeenVideosSubscriber*/
+/* global VideoRepository, CategoryRepository, VideoPlaybackStarted, SeenVideos, SeenVideosSubscriber,
+   UiRefreshSubscriber */
 'use strict';
 
 /**
  * Video player.
  *
  * @param youtubeVideoPlayer Youtube video player.
- * @param $rootScope         Rootscope object to pass data to template.
  * @param eventPublisher     Event publisher to tell about commands done.
  *
  * @constructor
  */
-function VideoPlayer(youtubeVideoPlayer, $rootScope, eventPublisher) {
+function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
 
     var currentlyPlayed = null;
 
@@ -29,7 +29,6 @@ function VideoPlayer(youtubeVideoPlayer, $rootScope, eventPublisher) {
     var playNextVideo = function () {
         this.currentlyPlayed = this.playList.next();
         this.currentlyPlayed.playWith(this);
-        $rootScope.video = this.currentlyPlayed;
         eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
     };
 
@@ -39,7 +38,6 @@ function VideoPlayer(youtubeVideoPlayer, $rootScope, eventPublisher) {
     var playPreviousVideo = function () {
         this.currentlyPlayed = this.playList.previous();
         this.currentlyPlayed.playWith(this);
-        $rootScope.video = this.currentlyPlayed;
         eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
     };
 
@@ -90,8 +88,5 @@ angular
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
     .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore); }])
     .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
-    .factory('videoPlayer',
-        ['youtubePlayerApi',
-         '$rootScope',
-         'eventPublisher',
-         VideoPlayer]);
+    .factory('uiRefreshSubscriber', ['$rootScope', UiRefreshSubscriber])
+    .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer]);
