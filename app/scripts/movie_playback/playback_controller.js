@@ -5,21 +5,20 @@
 angular
     .module('dobraFaza')
     .controller('PlaybackController',
-        ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
-         'categoryRepository', 'playerCode', 'ezfb', 'eventPublisher', 'votingEnablingSubscriber',
-         'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber',
+        ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository', 'categoryRepository',
+         'playerCode', 'ezfb', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber',
          function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber, seenVideosSubscriber, seenVideos,
+                   playerCode, ezfb, eventPublisher, seenVideosSubscriber, seenVideos,
                    uiRefreshSubscriber)
         {
-            $scope.shareToFb = function(video) {
-                ezfb.ui(
-                    {
-                        method: 'share',
-                        href: $window.location.host + '/play/' + video.videoId
-                    }
-                );
-            };
+//            $scope.shareToFb = function(video) {
+//                ezfb.ui(
+//                    {
+//                        method: 'share',
+//                        href: $window.location.host + '/play/' + video.videoId
+//                    }
+//                );
+//            };
             $window.onYouTubeIframeAPIReady = function () {
                 $q.all([categoryRepository.fetchAll(), videoRepository.fetchAll()])
                 .then(function(data) {
@@ -37,7 +36,6 @@ angular
                     );
                     var playList = new PlayList(videos, playlistFilter);
 
-                    eventPublisher.subscribe(votingEnablingSubscriber);
                     eventPublisher.subscribe(seenVideosSubscriber);
                     eventPublisher.subscribe(uiRefreshSubscriber);
 

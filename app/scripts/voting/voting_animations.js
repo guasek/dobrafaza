@@ -9,14 +9,12 @@ angular.module('dobrafaza.animations', [])
         this.$get = [function(){
             var api = {};
 
-            api.disableVoting = function disableVoting() {
-                angular.element(document.querySelector('#voting')).slideUp();
-                angular.element(document.querySelector('#voted')).slideDown();
+            api.showAboutUs = function showAboutUs() {
+                document.getElementById('about').className = 'about show';
             };
 
-            api.enableVoting = function enableVoting() {
-                angular.element(document.querySelector('#voting')).slideDown();
-                angular.element(document.querySelector('#voted')).slideUp();
+            api.hideAboutUs = function hideAboutUs() {
+                document.getElementById('about').className = 'about';
             };
 
             return api;
