@@ -29,7 +29,12 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
     var playNextVideo = function () {
         this.currentlyPlayed = this.playList.next();
         this.currentlyPlayed.playWith(this);
-        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
+        eventPublisher.publish(
+            new VideoPlaybackStarted(
+                this.currentlyPlayed.videoId,
+                this.currentlyPlayed.vendorVideoId,
+                this.currentlyPlayed.title)
+        );
     };
 
     /**
@@ -38,7 +43,12 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
     var playPreviousVideo = function () {
         this.currentlyPlayed = this.playList.previous();
         this.currentlyPlayed.playWith(this);
-        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
+        eventPublisher.publish(
+            new VideoPlaybackStarted(
+                this.currentlyPlayed.videoId,
+                this.currentlyPlayed.vendorVideoId,
+                this.currentlyPlayed.title)
+        );
     };
 
     /**
@@ -88,5 +98,6 @@ angular
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
     .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore); }])
     .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
-    .factory('uiRefreshSubscriber', ['$rootScope', UiRefreshSubscriber])
-    .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer]);
+    .factory('uiRefreshSubscriber', ['$rootScope', '$location', UiRefreshSubscriber])
+    .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer])
+    .factory('categorySettings', ['$cookieStore', function($cookieStore) { return new CategorySettings($cookieStore)}]);

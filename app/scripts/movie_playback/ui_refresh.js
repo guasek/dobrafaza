@@ -6,10 +6,11 @@
  * Ui Refresher.
  *
  * @param $rootScope Root scope angular service.
+ * @param $location  Location service.
  *
  * @constructor
  */
-function UiRefreshSubscriber($rootScope) {
+function UiRefreshSubscriber($rootScope, $location) {
 
     /**
      * Tells wheter subsciber subscribes to an event.
@@ -24,11 +25,19 @@ function UiRefreshSubscriber($rootScope) {
 
     /**
      * Handles given event
+     *
+     * @param event Event to be handled.
      */
-    var handle = function () {
+    var handle = function (event) {
         if(!$rootScope.$$phase) {
             $rootScope.$apply();
         }
+        $rootScope.video = {
+            videoId: event.videoId,
+            vendorVideoId: event.vendorVideoId,
+            title: event.title
+        };
+        $location.path('/play/' + event.videoId, false);
     };
 
     return {

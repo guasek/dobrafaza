@@ -36,7 +36,8 @@
                     id="cat{{ $index }}"
                     value="{{ category.name }}"
                     ng-model="category.turnedOn"
-                    ng-checked="{{ category.turnedOn }}">
+                    ng-checked="{{ category.turnedOn }}"
+                    ng-change="categorySettings.storeSettingOf(category)">
             <label for="cat{{ $index }}" class="label-cat">
                 <span class="icon{{ $index }}"></span>
                 <div class="double">{{category.name}}</div>

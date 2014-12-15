@@ -6,25 +6,17 @@ angular
     .module('dobraFaza')
     .controller('PlaybackController',
         ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository', 'categoryRepository',
-         'playerCode', 'ezfb', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber',
+         'playerCode', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber', 'categorySettings',
          function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb, eventPublisher, seenVideosSubscriber, seenVideos,
-                   uiRefreshSubscriber)
+                   playerCode, eventPublisher, seenVideosSubscriber, seenVideos, uiRefreshSubscriber, categorySettings)
         {
-//            $scope.shareToFb = function(video) {
-//                ezfb.ui(
-//                    {
-//                        method: 'share',
-//                        href: $window.location.host + '/play/' + video.videoId
-//                    }
-//                );
-//            };
             $window.onYouTubeIframeAPIReady = function () {
                 $q.all([categoryRepository.fetchAll(), videoRepository.fetchAll()])
                 .then(function(data) {
                     var categories = data[0];
                     var videos = data[1];
                     var startVideoId = $routeParams.videoId;
+                    categorySettings.applyTo(categories);
 
                     var seenMoviesFilter = new SeenVideosFilter(seenVideos);
                     var exclusiveVideoFilter = new ExclusiveVideoFilter(startVideoId);
@@ -44,6 +36,7 @@ angular
 
                     $scope.categories = categories;
                     $scope.videoPlayer = videoPlayer;
+                    $scope.categorySettings = categorySettings;
 
                     videoPlayer.startPlayback();
 
