@@ -25,7 +25,13 @@
     <div class="claim">Internet<br> na bieżąco</div>
 
     <div class="seen">
-        <input type="checkbox" name="seen" id="seen">
+        <input
+                type="checkbox"
+                name="seen"
+                id="seen"
+                ng-model="seenVideosFilter.active"
+                ng-checked="{{ seenVideosFilter.active }}"
+                ng-change="categorySettings.storeSeenMoviesSettings(seenVideosFilter);">
         <label for="seen">Tylko nieobejrzane<span class="switch"></span></label>
     </div>
     <ul ng-repeat="category in categories">
@@ -37,7 +43,7 @@
                     value="{{ category.name }}"
                     ng-model="category.turnedOn"
                     ng-checked="{{ category.turnedOn }}"
-                    ng-change="categorySettings.storeSettingOf(category)">
+                    ng-change="categorySettings.storeCategorySettings(category)">
             <label for="cat{{ $index }}" class="label-cat">
                 <span class="icon{{ $index }}"></span>
                 <div class="double">{{category.name}}</div>

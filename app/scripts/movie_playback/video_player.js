@@ -1,5 +1,5 @@
 /* global VideoRepository, CategoryRepository, VideoPlaybackStarted, SeenVideos, SeenVideosSubscriber,
-   UiRefreshSubscriber */
+   UiRefreshSubscriber, UserSettings */
 'use strict';
 
 /**
@@ -100,4 +100,4 @@ angular
     .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
     .factory('uiRefreshSubscriber', ['$rootScope', '$location', UiRefreshSubscriber])
     .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer])
-    .factory('categorySettings', ['$cookieStore', function($cookieStore) { return new CategorySettings($cookieStore)}]);
+    .factory('userSettings', ['$cookieStore', function($cookieStore) { return new UserSettings($cookieStore); }]);

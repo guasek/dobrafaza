@@ -6,9 +6,9 @@ angular
     .module('dobraFaza')
     .controller('PlaybackController',
         ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository', 'categoryRepository',
-         'playerCode', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber', 'categorySettings',
+         'playerCode', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber', 'userSettings',
          function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, eventPublisher, seenVideosSubscriber, seenVideos, uiRefreshSubscriber, categorySettings)
+                   playerCode, eventPublisher, seenVideosSubscriber, seenVideos, uiRefreshSubscriber, userSettings)
         {
             $window.onYouTubeIframeAPIReady = function () {
                 $q.all([categoryRepository.fetchAll(), videoRepository.fetchAll()])
@@ -16,7 +16,7 @@ angular
                     var categories = data[0];
                     var videos = data[1];
                     var startVideoId = $routeParams.videoId;
-                    categorySettings.applyTo(categories);
+                    userSettings.configureCategories(categories);
 
                     var seenMoviesFilter = new SeenVideosFilter(seenVideos);
                     var exclusiveVideoFilter = new ExclusiveVideoFilter(startVideoId);
@@ -28,6 +28,8 @@ angular
                     );
                     var playList = new PlayList(videos, playlistFilter);
 
+                    userSettings.configureSeenVideosFilter(seenMoviesFilter);
+
                     eventPublisher.subscribe(seenVideosSubscriber);
                     eventPublisher.subscribe(uiRefreshSubscriber);
 
@@ -36,7 +38,8 @@ angular
 
                     $scope.categories = categories;
                     $scope.videoPlayer = videoPlayer;
-                    $scope.categorySettings = categorySettings;
+                    $scope.categorySettings = userSettings;
+                    $scope.seenVideosFilter = seenMoviesFilter;
 
                     videoPlayer.startPlayback();
 
