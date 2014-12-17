@@ -69,7 +69,7 @@ function SeenVideosSubscriber(seenVideos) {
      * @param event Event to be handled
      */
     var handle = function (event) {
-        seenVideos.add(event.videoId);
+        seenVideos.add(event.currentlyPlayedVideo.videoId);
     };
 
     return {

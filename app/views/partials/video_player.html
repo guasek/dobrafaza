@@ -56,15 +56,21 @@
     <div class="movie">
         <div id="ytplayer" youtube-player></div>
     </div>
-    <a class="prev" ng-click="videoPlayer.playPreviousVideo()">
+    <a class="prev"
+       ng-click="videoPlayer.playPreviousVideo(); previousPreview = videoPlayer.previousVideoPreview()"
+       ng-mouseenter="previousPreview = videoPlayer.previousVideoPreview()"
+            >
             <span class="caption">
-                <img src="images/temp.jpg"> LGBT - lesbijki, geje, łosie... LGBT - lesbijki, geje, łosie...
+                <img src="{{ previousPreview.thumbnailUrl(); }}"> {{ previousPreview.showTitle(); }}
             </span>
         <span class="mobile-caption">Poprzedni</span>
     </a>
-    <a class="next" ng-click="videoPlayer.playNextVideo()">
+    <a class="next"
+       ng-click="videoPlayer.playNextVideo(); nextPreview = videoPlayer.nextVideoPreview()"
+       ng-mouseenter="nextPreview = videoPlayer.nextVideoPreview()"
+            >
             <span class="caption">
-                <img src="images/temp.jpg"> LGBT - lesbijki, geje, łosie... LGBT - lesbijki, geje, łosie...
+                <img src="{{ nextPreview.thumbnailUrl(); }}"> {{ nextPreview.showTitle(); }}
             </span>
         <span class="mobile-caption">Następny</span>
     </a>
@@ -85,7 +91,7 @@
 
     <div class="footer-info"></div>
 </div>
-<div class="notifier ns-hide" id="notifier">
+<div class="notifier ns-hide" id="notifier" ng-controller="NotificationBoxController">
     <a id="notifierClose" class="close">x</a>
     <img src="images/temp.jpg">
     <p>Podobał Ci się <b>poprzedni</b> film?</p>

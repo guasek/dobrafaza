@@ -11,6 +11,14 @@ $ bower install
 $ sudo grunt serve
 ```
 
+Then on your own machine:
+
+edit /etc/hosts and add:
+
+192.192.1.10 vagrant.dobrafaza.pl
+
+Done.
+
 #Deploy
 
 First you have to have chef and

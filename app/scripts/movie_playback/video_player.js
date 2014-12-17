@@ -27,13 +27,11 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
      * Plays next video from the playlist.
      */
     var playNextVideo = function () {
+        var previouslyPlayedVideo = this.currentlyPlayed;
         this.currentlyPlayed = this.playList.next();
         this.currentlyPlayed.playWith(this);
         eventPublisher.publish(
-            new VideoPlaybackStarted(
-                this.currentlyPlayed.videoId,
-                this.currentlyPlayed.vendorVideoId,
-                this.currentlyPlayed.title)
+            VideoPlaybackStarted.next(this.currentlyPlayed, previouslyPlayedVideo)
         );
     };
 
@@ -41,15 +39,31 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
      * Plays previous video from playlist.
      */
     var playPreviousVideo = function () {
+        var previouslyPlayedVideo = this.currentlyPlayed;
         this.currentlyPlayed = this.playList.previous();
         this.currentlyPlayed.playWith(this);
         eventPublisher.publish(
-            new VideoPlaybackStarted(
-                this.currentlyPlayed.videoId,
-                this.currentlyPlayed.vendorVideoId,
-                this.currentlyPlayed.title)
+            VideoPlaybackStarted.next(this.currentlyPlayed, previouslyPlayedVideo)
         );
     };
+
+    /**
+     * Returns previous video preview.
+     *
+     * @return {VideoPreview}
+     */
+    var previousVideoPreview = function () {
+        return this.playList.previousVideoPreview();
+    }
+
+    /**
+     * Returns next video preview.
+     *
+     * @return {VideoPreview}
+     */
+    var nextVideoPreview = function () {
+        return this.playList.nextVideoPreview();
+    }
 
     /**
      * Begins infinite video playback.
@@ -88,7 +102,9 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
         startPlayback: startPlayback,
         playYoutubeVideo: playYoutubeVideo,
         bringVideoToFront: bringVideoToFront,
-        playPreviousVideo: playPreviousVideo
+        playPreviousVideo: playPreviousVideo,
+        nextVideoPreview: nextVideoPreview,
+        previousVideoPreview: previousVideoPreview
     };
 }
 

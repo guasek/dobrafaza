@@ -12,6 +12,7 @@ angular.module('dobraFaza', [
     'EventPublisher',
     'youtube',
     'videoPlayback',
+    'Notifications',
     'dobrafaza.animations',
     'voting'
 ])

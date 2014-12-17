@@ -32,12 +32,14 @@ function UiRefreshSubscriber($rootScope, $location) {
         if(!$rootScope.$$phase) {
             $rootScope.$apply();
         }
+
+        var currentlyPlayed = event.currentlyPlayedVideo;
         $rootScope.video = {
-            videoId: event.videoId,
-            vendorVideoId: event.vendorVideoId,
-            title: event.title
+            videoId: currentlyPlayed.videoId,
+            vendorVideoId: currentlyPlayed.vendorVideoId,
+            title: currentlyPlayed.title
         };
-        $location.path('/play/' + event.videoId, false);
+        $location.path('/play/' + currentlyPlayed.videoId, false);
     };
 
     return {

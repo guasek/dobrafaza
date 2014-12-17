@@ -53,6 +53,24 @@ PlaybackControls.prototype.fastForward = function () {
 };
 
 /**
+ * Returns next video without taking it from the list.
+ *
+ * @return {Video}
+ */
+PlaybackControls.prototype.nextVideoPreview = function () {
+    return this.playedVideos[this.currentlyWatched + 1];
+};
+
+/**
+ * Returns previous video without taking it from the list.
+ *
+ * @return {Video}
+ */
+PlaybackControls.prototype.previousVideoPreview = function () {
+    return this.playedVideos[this.currentlyWatched - 1];
+};
+
+/**
  * Playlist object definition. Holds list of videos, can apply filters to them.
  *
  * @param {Array}       videoList List of videos for the playlist.
@@ -120,6 +138,39 @@ PlayList.prototype.next = function () {
 PlayList.prototype.previous = function () {
     return this.playbackControls.rewind();
 };
+
+/**
+ * Returns previous video preview.
+ *
+ * @return {VideoPreview}
+ */
+PlayList.prototype.previousVideoPreview = function () {
+    var videoToBePreviewed = this.playbackControls.previousVideoPreview();
+    if (typeof videoToBePreviewed === 'undefined') {
+        return VideoPreview.defaultVideoPreview();
+    }
+    return VideoPreview.youtubeVideoPreview(videoToBePreviewed);
+}
+
+/**
+ * Returns next video preview.
+ *
+ * @return {VideoPreview}
+ */
+PlayList.prototype.nextVideoPreview = function () {
+    if (this.playbackControls.isRewound()) {
+        var videoToBePreviewed = this.playbackControls.nextVideoPreview();
+        return VideoPreview.youtubeVideoPreview(videoToBePreviewed);
+    }
+
+    for (var i = 0; i < this.videoList.length; i++) {
+        var currentVideo = this.videoList[i];
+        if (this.filter.shouldPlay(currentVideo)) {
+            return VideoPreview.youtubeVideoPreview(currentVideo);
+        }
+    }
+    return null;
+}
 
 /**
  * Brings video with given id to the front of playlist.
