@@ -92,10 +92,10 @@
     <div class="footer-info"></div>
 </div>
 <div class="notifier ns-hide" id="notifier" ng-controller="NotificationBoxController">
-    <a id="notifierClose" class="close">x</a>
-    <img src="images/temp.jpg">
-    <p>Podobał Ci się <b>poprzedni</b> film?</p>
-    <div class="fb-like" data-href="http://dobrafaza.pl" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+    <a id="notifierClose" class="close" ng-click="notificationsService.closeLikeNotification()">x</a>
+    <img src="http://i1.ytimg.com/vi/{{ notificationsService.currentLikeRequest.vendorVideoId }}/hqdefault.jpg">
+    <p>Polub <b>obejrzany</b> film</p>
+    <div class="fb-like" data-href="http://dobrafaza.pl/play/{{ notificationsService.currentLikeRequest.videoId }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
 </div>
 

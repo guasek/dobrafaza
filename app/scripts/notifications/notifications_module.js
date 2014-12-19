@@ -7,7 +7,7 @@
  */
 function NotificationBoxController ($scope, notificationsService, eventPublisher, likeNotificationSubscriber) {
     eventPublisher.subscribe(likeNotificationSubscriber);
-    $scope.likeRequest = notificationsService.currentLikeRequest;
+    $scope.notificationsService = notificationsService;
 }
 
 angular

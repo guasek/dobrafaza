@@ -29,6 +29,7 @@ function LikeNotificationSubscriber(notificationsService) {
         if (event.previouslyPlayedVideo === null) {
             return;
         }
+        notificationsService.closeLikeNotification();
         notificationsService.showLikeNotification(event.previouslyPlayedVideo);
     };
 

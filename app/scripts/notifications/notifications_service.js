@@ -9,8 +9,11 @@ function NotificationsService () {
 
     var currentLikeRequest = {
         title: '',
-        videoId: ''
+        videoId: '',
+        vendorVideoId: ''
     };
+
+    var notifier = document.getElementById('notifier');
 
     /**
      * Shows like box notification.
@@ -18,15 +21,25 @@ function NotificationsService () {
      * @param {Video} videoForRequest Video to base request on.
      */
     var showLikeNotification = function (videoForRequest) {
-        currentLikeRequest = {
+        this.currentLikeRequest = {
             title: videoForRequest.title,
-            videoId: videoForRequest.videoId
+            videoId: videoForRequest.videoId,
+            vendorVideoId: videoForRequest.vendorVideoId
         };
-        console.log(currentLikeRequest);
+        notifier.className = 'notifier ns-show';
+        setTimeout(closeLikeNotification, 10000);
+    }
+
+    /**
+     * Closes currently shown notification.
+     */
+    var closeLikeNotification = function () {
+        notifier.className = 'notifier ns-hide';
     }
 
     return {
         currentLikeRequest: currentLikeRequest,
-        showLikeNotification: showLikeNotification
+        showLikeNotification: showLikeNotification,
+        closeLikeNotification: closeLikeNotification
     };
 }
