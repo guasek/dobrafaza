@@ -1,9 +1,9 @@
 'use strict';
 
-var advertising = angular.module('advertising', []);
+var advertising = angular.module('mieso', []);
 
 advertising
-    .directive('googleAdsense', function() {
+    .directive('duzeMieso', function() {
         return {
             restrict: 'A',
             transclude: true,

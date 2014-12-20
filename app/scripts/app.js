@@ -8,7 +8,7 @@ angular.module('dobraFaza', [
     'ngRoute',
     'adaptive.detection',
     'angularUtils.directives.dirPagination',
-    'advertising',
+    'mieso',
     'EventPublisher',
     'youtube',
     'videoPlayback',

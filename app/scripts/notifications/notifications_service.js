@@ -21,13 +21,10 @@ function NotificationsService () {
      * @param {Video} videoForRequest Video to base request on.
      */
     var showLikeNotification = function (videoForRequest) {
-        this.currentLikeRequest = {
-            title: videoForRequest.title,
-            videoId: videoForRequest.videoId,
-            vendorVideoId: videoForRequest.vendorVideoId
-        };
+        this.currentLikeRequest.title = videoForRequest.title;
+        this.currentLikeRequest.videoId = videoForRequest.videoId;
+        this.currentLikeRequest.vendorVideoId = videoForRequest.vendorVideoId;
         notifier.className = 'notifier ns-show';
-        setTimeout(closeLikeNotification, 10000);
     }
 
     /**
