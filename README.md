@@ -8,9 +8,16 @@ $ cd /project
 $ npm install
 $ sudo npm install -g bower
 $ bower install
-$ sudo apt-get install ruby-compass
 $ sudo grunt serve
 ```
+
+Then on your own machine:
+
+edit /etc/hosts and add:
+
+192.192.1.10 vagrant.dobrafaza.pl
+
+Done.
 
 #Deploy
 

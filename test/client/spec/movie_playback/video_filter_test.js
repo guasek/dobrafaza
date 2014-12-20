@@ -39,6 +39,12 @@ describe('Video filters tests', function () {
 
         expect(seenMoviesPlaylistFilter.shouldPlay(videoToBeShown)).toBeTruthy()
         expect(seenMoviesPlaylistFilter.shouldPlay(videoNotToBeShown)).toBeFalsy()
+
+        seenMoviesPlaylistFilter.deactivate();
+        expect(seenMoviesPlaylistFilter.shouldPlay(videoNotToBeShown)).toBeTruthy();
+
+        seenMoviesPlaylistFilter.activate();
+        expect(seenMoviesPlaylistFilter.shouldPlay(videoNotToBeShown)).toBeFalsy();
     });
 
     it('Can create and use conjunction filter', function () {

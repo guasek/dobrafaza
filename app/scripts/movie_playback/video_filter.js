@@ -39,6 +39,7 @@ CategoryVideoFilter.prototype.shouldPlay = function (video) {
  */
 function SeenVideosFilter(seenVideos) {
     this.seenVideos = seenVideos;
+    this.active = true;
 }
 
 /**
@@ -49,7 +50,24 @@ function SeenVideosFilter(seenVideos) {
  * @return {boolean}
  */
 SeenVideosFilter.prototype.shouldPlay = function (video) {
+    if (!this.active) {
+        return true;
+    }
     return !this.seenVideos.contains(video.videoId);
+};
+
+/**
+ * Activates filter
+ */
+SeenVideosFilter.prototype.activate = function () {
+    this.active = true;
+};
+
+/**
+ * Deactivates filter
+ */
+SeenVideosFilter.prototype.deactivate = function () {
+    this.active = false;
 };
 
 /**

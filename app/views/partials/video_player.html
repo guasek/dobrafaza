@@ -1,124 +1,164 @@
-<header xmlns="http://www.w3.org/1999/html">
-    <div class="row">
-        <div class="large-4 medium-4 small-12 columns">
-            <h1>
-                <a>
-                    <img ng-click="goToHome();" src="images/logo.png" alt="">
-                </a>
-            </h1>
-        </div>
-        <div class="large-6 medium-8 small-12 columns text-center">
-            <div class="b1">
-                <div google-adsense>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle"
-                         data-ad-client="ca-pub-4971215051679349"
-                         data-ad-slot="1711346636"
-                         style="display:inline-block;width:468px;height:15px">
-                    </ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
+<header>
+    <div class="hamburger" id="mobile-menu-switch"><span></span><span></span><span></span></div>
+    <a>
+        <span class="logo" ng-click="goToHome();" ></span>
+    </a>
+
+    <span class="contact" id="aboutShow" ng-click="$dfAnimate.showAboutUs();"><span class="icon-contact"></span>O nas</span>
+    <div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+        <span class="top">
+            <div google-adsense>
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                     data-ad-client="ca-pub-4971215051679349"
+                     data-ad-slot="1711346636"
+                     style="display:inline-block;width:468px;height:15px">
+                </ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
-        </div>
-        <div class="large-2 medium-2 small-12 columns text-center">
-            <div id="facebook-like-wrapper" class="facebook">
-                <div class="fb-like" data-href="https://www.facebook.com/dobrafaza" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
-            </div>
-        </div>
-    </div>
+        </span>
 </header>
-<section id="content">
-    <div class="row">
-        <div class="large-8 medium-8 small-12 columns title">
-            <h2>{{ videoPlayer.currentlyPlayed.title }}</h2>
-        </div>
-        <div class="large-4 medium-4 small-12 columns">
-            <div class="b2">
-                <div google-adsense>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <ins class="adsbygoogle"
-                         data-ad-client="ca-pub-4971215051679349"
-                         data-ad-slot="6222271432"
-                         style="display:inline-block;width:234px;height:60px">
-                    </ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
+<nav id="menu">
+    <div class="spacer"></div>
+    <div class="claim">Internet<br> na bieżąco</div>
+
+    <div class="seen">
+        <input
+                type="checkbox"
+                name="seen"
+                id="seen"
+                ng-model="seenVideosFilter.active"
+                ng-checked="{{ seenVideosFilter.active }}"
+                ng-change="categorySettings.storeSeenMoviesSettings(seenVideosFilter);">
+        <label for="seen">Tylko nieobejrzane<span class="switch"></span></label>
+    </div>
+    <ul ng-repeat="category in categories">
+        <li>
+            <input
+                    type="checkbox"
+                    name="{{ category.name }}"
+                    id="cat{{ $index }}"
+                    value="{{ category.name }}"
+                    ng-model="category.turnedOn"
+                    ng-checked="{{ category.turnedOn }}"
+                    ng-change="categorySettings.storeCategorySettings(category)">
+            <label for="cat{{ $index }}" class="label-cat">
+                <span class="icon{{ $index }}"></span>
+                <div class="double">{{category.name}}</div>
+            </label>
+        </li>
+    </ul>
+</nav>
+<div class="holder">
+    <h1>{{ videoPlayer.currentlyPlayed.title }}</h1>
+    <div class="movie">
+        <div id="ytplayer" youtube-player></div>
+    </div>
+    <a class="prev"
+       ng-click="videoPlayer.playPreviousVideo(); previousPreview = videoPlayer.previousVideoPreview()"
+       ng-mouseenter="previousPreview = videoPlayer.previousVideoPreview()"
+            >
+            <span class="caption">
+                <img src="{{ previousPreview.thumbnailUrl(); }}"> {{ previousPreview.showTitle(); }}
+            </span>
+        <span class="mobile-caption">Poprzedni</span>
+    </a>
+    <a class="next"
+       ng-click="videoPlayer.playNextVideo(); nextPreview = videoPlayer.nextVideoPreview()"
+       ng-mouseenter="nextPreview = videoPlayer.nextVideoPreview()"
+            >
+            <span class="caption">
+                <img src="{{ nextPreview.thumbnailUrl(); }}"> {{ nextPreview.showTitle(); }}
+            </span>
+        <span class="mobile-caption">Następny</span>
+    </a>
+
+    <div class="bottom">
+        <div google-adsense>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Dół baner -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-4971215051679349"
+                 data-ad-slot="2033585036"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
-    <div class="row">
-        <div class="large-8 medium-12 small-12 columns">
-            <div id="video">
-                <div id="ytplayer" youtube-player>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns" ng-controller="VotingController">
-                    <div id="voting">
-                        <a ng-click="voter.voteUp(videoPlayer.currentlyPlayed);" class="btn cool large-6 medium-6 small-12 columns">Dobra faza <span>({{ videoPlayer.currentlyPlayed.votesUp }})</span></a>
-                        <a ng-click="voter.voteDown(videoPlayer.currentlyPlayed);" class="btn shit large-6 medium-6 small-12 columns">Słabe <span>({{ videoPlayer.currentlyPlayed.votesDown }})</span></a>
-                    </div>
-                    <div id="voted" class="hide">
-                        Dzięki! Dzięki! Dzięki Tobie Dobra Faza będzie jeszcze lepsza!<br>
-                        Tymczasem <a ng-click="shareToFb(videoPlayer.currentlyPlayed);">udostępnij ten film!</a><br>
-                    </div>
-                </div>
-            </div>
-            <div id="categories">
-                <label ng-repeat="category in categories">
-                    <input
-                            type="checkbox"
-                            name="categoriesList[]"
-                            value="{{category.name}}"
-                            ng-checked="{{category.turnedOn}}"
-                            ng-model="category.turnedOn"
-                            > {{category.name}}
-                    </input>
-                </label>
-            </div>
-        </div>
-        <div class="large-4 medium-12 small-12 columns">
-            <div class="row share">
-                <div class="large-12 medium-12 small-12 columns">
-                    <a href="" class="btn fb" ng-click="shareToFb(videoPlayer.currentlyPlayed);">Udostępnij ten film</a>
-                </div>
-                <div class="large-12 medium-12 small-12 columns">
-                    <a href="" class="btn next" ng-click="videoPlayer.playNextVideo()">Następny film</a>
-                </div>
-                <div class="large-12 medium-12 small-12 columns">
-                    <a href="" class="btn next" ng-click="videoPlayer.playPreviousVideo()">Poprzedni film</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns text-center sense">
-                    <div google-adsense>
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <ins class="adsbygoogle"
-                             data-ad-client="ca-pub-4971215051679349"
-                             data-ad-slot="1652471032"
-                             style="display:inline-block;width:300px;height:250px">
-                        </ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <div class="footer-info"></div>
+</div>
+<div class="notifier ns-hide" id="notifier" ng-controller="NotificationBoxController">
+    <a id="notifierClose" class="close" ng-click="notificationsService.closeLikeNotification()">x</a>
+    <img src="http://i1.ytimg.com/vi/{{ notificationsService.currentLikeRequest.vendorVideoId }}/hqdefault.jpg">
+    <p>Polub <b>obejrzany</b> film</p>
+    <div class="fb-like" data-href="http://dobrafaza.pl/play/{{ notificationsService.currentLikeRequest.videoId }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+
+</div>
+
+<section class="about" id="about">
+    <a class="close" id="aboutClose" ng-click="$dfAnimate.hideAboutUs();">x</a>
+    <h2>O nas</h2>
+    <p>
+        Dobra faza to filmiki i teorie spiskowe, starannie wyselekcjonowane przez bandę nerdów z IT. <br>
+        Chętnie wpółpracujemy z ludzmi oraz reptilianami.
+    </p>
+    <div class="col">
+        <a href="https://www.facebook.com/dobrafaza" class="fb" target="_blank">
+            <span class="icon"></span>
+            dobrafaza
+        </a>
+    </div>
+    <div class="col">
+        <a href="https://twitter.com/fazadobra" class="tw" target="_blank">
+            <span class="icon"></span>
+            dobrafaza
+        </a>
+    </div>
+    <div class="col">
+        <a href="http://instagram.com/dobrafaza" class="ins" target="_blank">
+            <span class="icon"></span>
+            dobrafaza
+        </a>
+    </div>
+    <div class="col">
+        <a class="mail" href="mailto:kontakt@dobrafaza.pl">
+            <span class="icon"></span>
+            dobrafaza
+        </a>
+    </div>
+
+        <span class="persons">
+            Kto za tym stoi?
+        </span>
+    <img src="images/team.jpg">
+    <div class="col">
+        <h3>Paweł</h3>
+        Wzieliśmy go do zespołu,
+        bo ma śmieszne brwi.
+        Programista.
+    </div>
+    <div class="col">
+        <h3>Filip</h3>
+        Swojego drugiego syna nazwie Adwords.
+        Czekamy aż będzie miał czas, żeby pracować.
+        Marketingowiec.
+    </div>
+    <div class="col">
+        <h3>Bart</h3>
+        Najlepszy zięć na świecie .
+        Dotarł do ciemnej strony
+        internetu i się tam zadomowił.
+        Reptilanin.
+    </div>
+    <div class="col">
+        <h3>Dawid</h3>
+        Myśli że jest dobrym grafikiem.
+        Tak naprawdę nikt mu nie sugeruje poprawek, bo się obraża.
     </div>
 </section>
-
-
-<footer>
-    <div class="row">
-        <div class="large-12 medium-12 small-12 columns blue">
-            <p>
-                Copyright &copy; 2014 by dobrafaza.pl. <a href="mailto:kontakt@dobrafaza.pl">kontakt@dobrafaza.pl</a>
-            </p>
-        </div>
-    </div>
-</footer>
+<div class="overlay" id="overlayClose" ng-click="$dfAnimate.hideAboutUs();"></div>
+<div id="fb-root"></div>

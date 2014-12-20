@@ -20,7 +20,7 @@ function VotingEnablingSubscriber(animationService, locationService) {
      * @return {boolean}
      */
     var isSubscribedTo = function (event) {
-        return event instanceof VideoPlaybackStarted;
+        return event instanceof PreviousVideoPlaybackStarted;
     };
 
     /**

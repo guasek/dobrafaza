@@ -1,5 +1,5 @@
 /* global VideoRepository, CategoryRepository, VideoPlaybackStarted, SeenVideos, SeenVideosSubscriber,
-   UiRefreshSubscriber */
+   UiRefreshSubscriber, UserSettings */
 'use strict';
 
 /**
@@ -27,19 +27,43 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
      * Plays next video from the playlist.
      */
     var playNextVideo = function () {
+        var previouslyPlayedVideo = this.currentlyPlayed;
         this.currentlyPlayed = this.playList.next();
         this.currentlyPlayed.playWith(this);
-        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
+        eventPublisher.publish(
+            VideoPlaybackStarted.next(this.currentlyPlayed, previouslyPlayedVideo)
+        );
     };
 
     /**
      * Plays previous video from playlist.
      */
     var playPreviousVideo = function () {
+        var previouslyPlayedVideo = this.currentlyPlayed;
         this.currentlyPlayed = this.playList.previous();
         this.currentlyPlayed.playWith(this);
-        eventPublisher.publish(new VideoPlaybackStarted(this.currentlyPlayed.videoId));
+        eventPublisher.publish(
+            VideoPlaybackStarted.next(this.currentlyPlayed, previouslyPlayedVideo)
+        );
     };
+
+    /**
+     * Returns previous video preview.
+     *
+     * @return {VideoPreview}
+     */
+    var previousVideoPreview = function () {
+        return this.playList.previousVideoPreview();
+    }
+
+    /**
+     * Returns next video preview.
+     *
+     * @return {VideoPreview}
+     */
+    var nextVideoPreview = function () {
+        return this.playList.nextVideoPreview();
+    }
 
     /**
      * Begins infinite video playback.
@@ -78,7 +102,9 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
         startPlayback: startPlayback,
         playYoutubeVideo: playYoutubeVideo,
         bringVideoToFront: bringVideoToFront,
-        playPreviousVideo: playPreviousVideo
+        playPreviousVideo: playPreviousVideo,
+        nextVideoPreview: nextVideoPreview,
+        previousVideoPreview: previousVideoPreview
     };
 }
 
@@ -88,5 +114,6 @@ angular
     .factory('categoryRepository', ['$http', '$q', CategoryRepository])
     .factory('seenVideos', ['$cookieStore', function($cookieStore) { return new SeenVideos(100, $cookieStore); }])
     .factory('seenVideosSubscriber', ['seenVideos', SeenVideosSubscriber])
-    .factory('uiRefreshSubscriber', ['$rootScope', UiRefreshSubscriber])
-    .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer]);
+    .factory('uiRefreshSubscriber', ['$rootScope', '$location', UiRefreshSubscriber])
+    .factory('videoPlayer',  ['youtubePlayerApi', 'eventPublisher', VideoPlayer])
+    .factory('userSettings', ['$cookieStore', function($cookieStore) { return new UserSettings($cookieStore); }]);

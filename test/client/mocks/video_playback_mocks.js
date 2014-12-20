@@ -1,5 +1,5 @@
 var youtubeVideoPlayer = {
-    playVideo: function(youtubeId) {}
+    playVideo: function(youtubeId, self) {}
 };
 var eventDispatcherMock = {
     publish: function() {}

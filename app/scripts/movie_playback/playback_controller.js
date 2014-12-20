@@ -5,27 +5,18 @@
 angular
     .module('dobraFaza')
     .controller('PlaybackController',
-        ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository',
-         'categoryRepository', 'playerCode', 'ezfb', 'eventPublisher', 'votingEnablingSubscriber',
-         'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber',
+        ['$scope', '$window', '$routeParams', '$q', 'videoPlayer', 'videoRepository', 'categoryRepository',
+         'playerCode', 'eventPublisher', 'seenVideosSubscriber', 'seenVideos', 'uiRefreshSubscriber', 'userSettings',
          function ($scope, $window, $routeParams, $q, videoPlayer, videoRepository, categoryRepository,
-                   playerCode, ezfb, eventPublisher, votingEnablingSubscriber, seenVideosSubscriber, seenVideos,
-                   uiRefreshSubscriber)
+                   playerCode, eventPublisher, seenVideosSubscriber, seenVideos, uiRefreshSubscriber, userSettings)
         {
-            $scope.shareToFb = function(video) {
-                ezfb.ui(
-                    {
-                        method: 'share',
-                        href: $window.location.host + '/play/' + video.videoId
-                    }
-                );
-            };
             $window.onYouTubeIframeAPIReady = function () {
                 $q.all([categoryRepository.fetchAll(), videoRepository.fetchAll()])
                 .then(function(data) {
                     var categories = data[0];
                     var videos = data[1];
                     var startVideoId = $routeParams.videoId;
+                    userSettings.configureCategories(categories);
 
                     var seenMoviesFilter = new SeenVideosFilter(seenVideos);
                     var exclusiveVideoFilter = new ExclusiveVideoFilter(startVideoId);
@@ -37,7 +28,8 @@ angular
                     );
                     var playList = new PlayList(videos, playlistFilter);
 
-                    eventPublisher.subscribe(votingEnablingSubscriber);
+                    userSettings.configureSeenVideosFilter(seenMoviesFilter);
+
                     eventPublisher.subscribe(seenVideosSubscriber);
                     eventPublisher.subscribe(uiRefreshSubscriber);
 
@@ -46,6 +38,8 @@ angular
 
                     $scope.categories = categories;
                     $scope.videoPlayer = videoPlayer;
+                    $scope.categorySettings = userSettings;
+                    $scope.seenVideosFilter = seenMoviesFilter;
 
                     videoPlayer.startPlayback();
 

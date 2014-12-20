@@ -10,7 +10,7 @@ describe('Videoplayer tests', function () {
         var playlist = PlayList.create(testVideos, filterStub);
 
         var videoPlayer = new VideoPlayer(
-            youtubeVideoPlayer, rootScopeMock, eventDispatcherMock
+            youtubeVideoPlayer, eventDispatcherMock
         );
         videoPlayer.setPlaylist(playlist);
         spyOn(youtubeVideoPlayer, 'playVideo');
