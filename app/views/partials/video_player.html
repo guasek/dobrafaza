@@ -1,5 +1,9 @@
 <header>
-    <div class="hamburger" id="mobile-menu-switch"><span></span><span></span><span></span></div>
+    <div
+            class="hamburger"
+            id="mobile-menu-switch"
+            ng-controller="MenuController"
+            ng-click="mobileMenu.toggle();"><span></span><span></span><span></span></div>
     <a>
         <span class="logo" ng-click="goToHome();" ></span>
     </a>

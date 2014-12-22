@@ -10,10 +10,16 @@ function NotificationBoxController ($scope, notificationsService, eventPublisher
     $scope.notificationsService = notificationsService;
 }
 
+function MenuController ($scope, mobileMenu) {
+    $scope.mobileMenu = mobileMenu;
+}
+
 angular
     .module('Notifications', [])
+    .factory('mobileMenu', [ MobileMenu ])
     .factory('notificationsService', [ NotificationsService ])
     .factory('likeNotificationSubscriber', ['notificationsService', LikeNotificationSubscriber ])
+    .controller('MenuController', ['$scope', 'mobileMenu', MenuController])
     .controller(
         'NotificationBoxController',
         ['$scope', 'notificationsService', 'eventPublisher', 'likeNotificationSubscriber' , NotificationBoxController]
