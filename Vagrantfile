@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = 'vagrant.dobrafaza.pl'
 
   config.vm.network :forwarded_port, guest: 9000, host: 9000
-  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network :forwarded_port, guest: 3307, host: 3307
 
   config.vm.network :private_network, ip: '192.192.1.10'
 

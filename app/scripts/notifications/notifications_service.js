@@ -14,6 +14,7 @@ function NotificationsService () {
     };
 
     var notifier = document.getElementById('notifier');
+    var notifierMieso = document.getElementById('notifierMieso');
 
     /**
      * Shows like box notification.
@@ -28,15 +29,29 @@ function NotificationsService () {
     }
 
     /**
+     * Shows mieso box notification.
+     *
+     */
+    var showMiesoNotification = function () {
+        notifierMieso.className = 'notifier mieso ns-show';
+        console.log('MIESO!');
+    }
+
+    /**
      * Closes currently shown notification.
      */
     var closeLikeNotification = function () {
         notifier.className = 'notifier ns-hide';
     }
+    var closeMiesoNotification = function () {
+        notifierMieso.className = 'notifier mieso ns-hide';
+    }
 
     return {
         currentLikeRequest: currentLikeRequest,
         showLikeNotification: showLikeNotification,
-        closeLikeNotification: closeLikeNotification
+        showMiesoNotification : showMiesoNotification,
+        closeLikeNotification: closeLikeNotification,
+        closeMiesoNotification: closeMiesoNotification
     };
 }
