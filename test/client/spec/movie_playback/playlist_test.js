@@ -71,7 +71,7 @@ describe('Playlist and PlaybackControls tests', function () {
         playlist.next();
 
         var previousVideoPreview = playlist.previousVideoPreview();
-        expect(previousVideoPreview.thumbnailUrl()).toEqual('images/temp.jpg');
+        expect(previousVideoPreview.thumbnailUrl()).toEqual('');
         expect(previousVideoPreview.showTitle()).toEqual('Nie można cofnąć filmu');
 
         var newVideoPreview = playlist.nextVideoPreview();
