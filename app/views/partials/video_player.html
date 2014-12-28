@@ -96,7 +96,7 @@
 
     <div class="footer-info"></div>
 </div>
-<div class="notifier ns-hide" id="notifier" ng-controller="NotificationBoxController">
+<div class="notifier ns-hide ng-hide" id="notifier" ng-controller="NotificationBoxController">
     <a id="notifierClose" class="close" ng-click="notificationsService.closeLikeNotification()">x</a>
     <img src="http://i1.ytimg.com/vi/{{ notificationsService.currentLikeRequest.vendorVideoId }}/hqdefault.jpg">
     <p>Polub <b>obejrzany</b> film</p>

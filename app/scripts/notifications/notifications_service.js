@@ -25,7 +25,7 @@ function NotificationsService () {
         this.currentLikeRequest.title = videoForRequest.title;
         this.currentLikeRequest.videoId = videoForRequest.videoId;
         this.currentLikeRequest.vendorVideoId = videoForRequest.vendorVideoId;
-        notifier.className = 'notifier ns-show';
+        notifier.className = 'notifier ns-show ng-show';
     }
 
     /**
@@ -33,8 +33,7 @@ function NotificationsService () {
      *
      */
     var showMiesoNotification = function () {
-        notifierMieso.className = 'notifier mieso ns-show';
-        console.log('MIESO!');
+        notifierMieso.className = 'notifier mieso ns-show ng-show';
     }
 
     /**
@@ -44,7 +43,7 @@ function NotificationsService () {
         notifier.className = 'notifier ns-hide';
     }
     var closeMiesoNotification = function () {
-        notifierMieso.className = 'notifier mieso ns-hide';
+        notifierMieso.className = 'notifier mieso ns-hide ng-hide';
     }
 
     return {
