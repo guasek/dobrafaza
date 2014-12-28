@@ -50,5 +50,5 @@ VideoPreview.youtubeVideoPreview = function (youtubeVideo) {
  * @return {VideoPreview}
  */
 VideoPreview.defaultVideoPreview = function () {
-    return new VideoPreview('Nie można cofnąć filmu', 'images/temp.jpg');
+    return new VideoPreview('Nie można cofnąć filmu', '');
 };
