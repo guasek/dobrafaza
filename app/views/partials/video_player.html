@@ -56,9 +56,11 @@
     </ul>
 </nav>
 <div class="holder" ng-controller="NotificationBoxController">
-    <div class="fb-like" data-href="http://dobrafaza.pl/play/{{ videoPlayer.currentlyPlayed.videoId }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-    <div class="fb-share-button" data-href="http://dobrafaza.pl/play/{{ videoPlayer.currentlyPlayed.videoId }}" data-layout="button_count"></div>
+    
     <h1>{{ videoPlayer.currentlyPlayed.title }}</h1>
+    <div class="share-video">
+        <div class="fb-like" data-href="http://dobrafaza.pl/play/{{ videoPlayer.currentlyPlayed.videoId }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+    </div>
     <div class="movie">
         <div id="ytplayer" youtube-player></div>
     </div>
