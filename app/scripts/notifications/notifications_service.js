@@ -29,8 +29,14 @@ function NotificationsService () {
     }
 
     /**
-     * Shows mieso box notification.
-     *
+     * Start showing ads in notification box.
+     */
+    var startMiesoNotifications = function () {
+        setTimeout(showMiesoNotification, 5000);
+    }
+
+    /**
+     * Shows ad in notification box.
      */
     var showMiesoNotification = function () {
         notifierMieso.className = 'notifier mieso ns-show ng-show';
@@ -43,13 +49,17 @@ function NotificationsService () {
         notifier.className = 'notifier ns-hide';
     }
     var closeMiesoNotification = function () {
-        notifierMieso.className = 'notifier mieso ns-hide ng-hide';
+        notifierMieso.className = 'notifier mieso ns-hide';
+        setTimeout(function () {
+            notifierMieso.className = 'notifier mieso ns-hide ng-hide';
+        }, 1000);
+        setTimeout(showMiesoNotification, 90000);
     }
 
     return {
         currentLikeRequest: currentLikeRequest,
         showLikeNotification: showLikeNotification,
-        showMiesoNotification : showMiesoNotification,
+        startMiesoNotifications: startMiesoNotifications,
         closeLikeNotification: closeLikeNotification,
         closeMiesoNotification: closeMiesoNotification
     };

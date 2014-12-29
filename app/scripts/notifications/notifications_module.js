@@ -8,6 +8,7 @@
 function NotificationBoxController ($scope, notificationsService, eventPublisher, likeNotificationSubscriber) {
     eventPublisher.subscribe(likeNotificationSubscriber);
     $scope.notificationsService = notificationsService;
+    notificationsService.startMiesoNotifications();
 }
 
 function MenuController ($scope, mobileMenu) {
