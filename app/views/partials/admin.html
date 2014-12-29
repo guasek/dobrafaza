@@ -1,58 +1,117 @@
-<form name="adminForm" novalidate class="new-video-form" xmlns="http://www.w3.org/1999/html">
-    Tytuł filmu: <input class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.title"/><br/>
-    PEŁNY link do filmiku na Youtubie: <input class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.url" ng-minlength="5"/>
-    <br />
-    <button
-            ng-disable="adminForm.$invalid || adminForm.$pristine"
-            ng-click="
-            videoRepository.store(videoFactory.videoFromPreProducts());
-            pageChanged(pagination.current);
-            ">DODAJ FILMIK DO FAZY
-    </button>
+
+<header>
+    <a>
+        <span class="logo" ng-click="goToHome();" ></span>
+    </a>
+
+    
+        <span class="top">
+           
+        </span>
+</header>
+<div id="admin">
+    <h1>Dodaj nowy film:</h1>
+    <form name="adminForm" novalidate class="new-video-form" xmlns="http://www.w3.org/1999/html">
+        
+        <div class="half">
+            <label for="newTitle">Tytuł filmu:</label> <br>
+            <input id="newTitle" class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.title" ng-minlength="3"/>
+        </div>
+        <div class="half">
+            <label for="newLink">Link do filmu (tylko YT):</label> <br>
+            <input id="newLink" class="admin-input-vid" type="text" ng-model="videoFactory.videoPreProducts.url" ng-minlength="5"/>
+        </div>
+        <br>
+
+        <div class="label">
+            <label>
+                <input
+                    type="checkbox"
+                    ng-model="category.turnedOn"
+                    id
+                    > 
+                </input>
+                <span>aaaa</span>
+            
+            </label>
+        </div>
+        <br>
+        <label>Kategoria filmiku:</label>
+        <div class="label" ng-repeat="category in videoFactory.videoPreProducts.categories">
+            <label>
+                <input
+                    type="checkbox"
+                    ng-model="category.turnedOn"
+                    id
+                    > 
+                </input>
+                <span>{{category.name}}</span>
+            
+            </label>
+        </div>
+        <br>
+        <div class="half">
+            <button
+                    ng-disable="adminForm.$invalid || adminForm.$pristine"
+                    ng-click="
+                    videoRepository.store(videoFactory.videoFromPreProducts());
+                    pageChanged(pagination.current);
+                    ">Dodaj
+            </button>
+        </div>
+    </form>
     <br/>
-    <label ng-repeat="category in videoFactory.videoPreProducts.categories">
-        <input
-                type="checkbox"
-                ng-model="category.turnedOn"
-                > {{category.name}}
-        </input>
-    </label>
-</form><br/>
+    <h1>Lista filmów</h1>
 
-<table>
-    <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 25" total-items="totalVideos">
-        <td><img src="http://i1.ytimg.com/vi/{{pVideo.vendorVideoId}}/default.jpg" width="120" height="90" /></td>
-        <td>
-            <form name="videoModifyForm" novalidate class="modify-video-form">
-                <input class="admin-input-vid" size="50" type="text" ng-model="pVideo.title"/><br/>
-                <label ng-repeat="category in categories">
-                    <input
-                            type="checkbox"
-                            ng-checked="pVideo.belongsTo(category)"
-                            ng-true-value="add"
-                            ng-false-value="remove"
-                            ng-click="changeVideoCategoryBelonging($event, pVideo, category)"
-                            > {{category.name}}
-                    </input>
-                </label><br/>
-                <button
-                        ng-disable="adminForm.$invalid || adminForm.$pristine"
-                        ng-click="
-                            videoRepository.store(pVideo);
-                            pageChanged(pagination.current);
-                        ">Zapisz
-                </button>
-                <button
-                        ng-disable="adminForm.$invalid || adminForm.$pristine"
-                        ng-click="
-                            videoRepository.remove(pVideo);
-                            pageChanged(pagination.current);
-                        ">Usuń film
-                </button>
-            </form>
-        </td>
-        <td><a href="/play/{{pVideo.videoId}}">Link do filmu</a></td>
-    </tr>
-</table>
+    <table>
+        <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 3" total-items="totalVideos">
+            <td>
+                <a href="/play/{{pVideo.videoId}}">
+                    <img src="http://i1.ytimg.com/vi/{{pVideo.vendorVideoId}}/default.jpg" width="120" height="90" />
+                </a>
+            </td>
+            <td>
+                <form name="videoModifyForm" novalidate class="modify-video-form">
+                    <div class="half">
+                        <label for="{{pVideo.title}}">Tytuł filmu:</label> <br>
+                       <input id="{{pVideo.title}}" class="admin-input-vid" type="text" ng-model="pVideo.title"/>
+                    </div>
+                    <br>
+                    <label>Kategoria filmiku:</label>
+                    <br>
+                    <div class="label" ng-repeat="category in categories">
+                        <label>
+                            <input
+                                type="checkbox"
+                                ng-checked="pVideo.belongsTo(category)"
+                                ng-true-value="add"
+                                ng-false-value="remove"
+                                ng-click="changeVideoCategoryBelonging($event, pVideo, category)"
+                                > 
+                            </input>
+                            <span>{{category.name}}</span>
+                        </label>
+                    </div>
 
-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+                    <button
+                            class=""
+                            ng-disable="adminForm.$invalid || adminForm.$pristine"
+                            ng-click="
+                                videoRepository.store(pVideo);
+                                pageChanged(pagination.current);
+                            ">Zapisz
+                    </button>
+                    <button
+                            ng-disable="adminForm.$invalid || adminForm.$pristine"
+                            ng-click="
+                                videoRepository.remove(pVideo);
+                                pageChanged(pagination.current);
+                            ">Usuń
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+</div>

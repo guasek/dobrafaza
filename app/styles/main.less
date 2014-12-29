@@ -389,6 +389,113 @@ h1{
 .notifier{
     display: none;
 }
+
+// Admin
+
+#admin{
+    background: @blue;
+    padding: 40px;
+    color: #fff;
+    overflow: hidden;
+    h1{
+        color: #fff;
+        font-weight: 300;
+    }
+    form[name="adminForm"]{
+        padding: 0 0 20px 120px;
+        overflow: hidden;
+        border-bottom: 1px solid #4c4674;
+    }
+    .half{
+        float: left;
+        width: 50%;
+        padding: 0 20px 10px 0;
+        .box-sizing();
+    }
+    input[type='text']{
+        border: 0;
+        background: #a5a2ba;
+        line-height: 45px;
+        color: black;
+        width: 100%;
+        padding: 0 20px; 
+        .box-sizing();
+        color: #3d3b4a;
+        &:focus, &:active{
+            background: #fff;
+        }
+    }
+    label{
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    div.label{
+        display: inline-block;
+        input{
+            display: none;
+        }
+        label{
+            cursor: pointer;
+            span{
+                display: inline-block;
+                color: #fff;
+                font-weight: bold;
+                position: relative;
+                line-height: 23px;
+                &:before{
+                    content:'';
+                    float:left;
+                    width:23px;
+                    height: 23px;
+                    .border-radius(50%);
+                    border: 1px solid #7b7799;
+                    margin-right: 5px;
+                };
+                &:after{
+                    content: '';
+                    display: block;
+                    width: 9px;
+                    height: 8px;
+                    position: absolute;
+                    background: url(../images/sprite.png) -91px -121px; 
+                    left: 8px;
+                    top: 10px; 
+                    .opacity(0);
+                    .transition(opacity .2s);       
+                }
+            }
+            input[ng-checked="true"] + span{
+                &:after{
+                    .opacity(100);
+                }
+            }
+            input:checked + span{
+                &:after{
+                    .opacity(100);
+                }
+            }
+        }
+       
+        
+    }
+    button{
+        background: transparent;
+        border: 2px solid #58537c;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 45px;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 0 40px;
+        cursor: pointer;
+        &.active{
+            background: #90cd00;
+            border: 2px solid #90cd00;
+        }
+    }
+    
+}
+
 @media all and(min-width:750px){
     .holder{
         width: 728px;
