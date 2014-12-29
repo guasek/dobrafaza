@@ -103,8 +103,8 @@
 <div class="notifier ns-hide ng-hide" id="notifier" ng-controller="NotificationBoxController">
     <a id="notifierClose" class="close" ng-click="notificationsService.closeLikeNotification()">x</a>
     <img src="http://i1.ytimg.com/vi/{{ notificationsService.currentLikeRequest.vendorVideoId }}/hqdefault.jpg">
-    <p>Polub <b>obejrzany</b> film</p>
-    <div class="fb-like" data-href="http://dobrafaza.pl/play/{{ notificationsService.currentLikeRequest.videoId }}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+    <p>Udostępnij <b>obejrzany</b> film</p>
+    <div class="fb-share-button" data-href="http://dobrafaza.pl/play/{{ notificationsService.currentLikeRequest.videoId }}" data-layout="button_count"></div>
 </div>
 <div class="notifier mieso" id="notifierMieso" ng-controller="NotificationBoxController">
     <a id="notifierMiesoClose" class="close" ng-click="notificationsService.closeMiesoNotification()">x</a>
