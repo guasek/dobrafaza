@@ -52,7 +52,7 @@
     <h1>Lista filmów</h1>
 
     <table>
-        <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 3" total-items="totalVideos">
+        <tr dir-paginate="pVideo in paginatedVideos | itemsPerPage: 25" total-items="totalVideos">
             <td width="130">
                 <a href="/play/{{pVideo.videoId}}" target="_blank">
                     <img src="http://i1.ytimg.com/vi/{{pVideo.vendorVideoId}}/default.jpg" width="120" height="90" />
