@@ -47,7 +47,6 @@ header{
     width:156px;
     height: 50px;
     background-position: 0 -206px;
-    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -55,7 +54,6 @@ header{
     float:left;
     background-color:@blue;
     padding: 18px 12px 14px;
-    margin-right: 60px;
     cursor: pointer;
     span{
         display: block;
@@ -72,8 +70,7 @@ header{
 .fb-like{
     float:right;
     line-height: 33px;
-    margin:15px 25px 0 10px;
-
+    margin:15px 25px 0 0;
 }
 .icon-contact{
     &:extend(.sprite);
@@ -279,7 +276,7 @@ li{
 }    
 
 .holder{
-    width: 440px;
+    min-width: 320px;
     margin: auto;
     padding-bottom: 20px;
     .movie{
@@ -575,6 +572,15 @@ h1{
             }
         }
     }
+}
+@media all and(min-width:480px){
+    .hamburger{
+        margin-right: 60px;
+    }
+    .logo{
+        margin-left: 20px;
+    }
+
 }
 
 @media all and(min-width:750px){
