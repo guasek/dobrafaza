@@ -49,7 +49,7 @@
                     ng-checked="{{ category.turnedOn }}"
                     ng-change="categorySettings.storeCategorySettings(category)">
             <label for="cat{{ $index }}" class="label-cat">
-                <span class="icon{{ $index }}"></span>
+                <span class="icon-{{ category.canonicalName }}"></span>
                 <div class="double">{{category.name}}</div>
             </label>
         </li>

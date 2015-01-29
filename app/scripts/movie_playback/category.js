@@ -4,15 +4,17 @@
 /**
  * Category object.
  *
- * @param {CategoryId} id       Category id object.
- * @param {String}     name     Category name
- * @param {boolean}    turnedOn Boolean stating whether category is active.
+ * @param {CategoryId} id            Category id object.
+ * @param {String}     name          Category name
+ * @param {boolean}    turnedOn      Boolean stating whether category is active.
+ * @param {string}     canonicalName Canonical category name.
  *
  * @constructor
  */
-function Category(id, name, turnedOn) {
+function Category(id, name, turnedOn, canonicalName) {
     this.id = id;
     this.name = name;
+    this.canonicalName = canonicalName;
     this.turnedOn = turnedOn;
 }
 
@@ -72,7 +74,7 @@ function CategoryRepository($http, $q) {
             var categories = [];
             for (var index=0; index<rawCategories.length; index++) {
                 var rawCategory = rawCategories[index];
-                categories.push(new Category(rawCategory._id, rawCategory.name, true));
+                categories.push(new Category(rawCategory._id, rawCategory.name, true, rawCategory.canonicalName));
             }
             deferred.resolve(categories);
         });
