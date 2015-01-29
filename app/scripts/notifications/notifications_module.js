@@ -1,3 +1,4 @@
+/* global MobileMenu, NotificationsService, LikeNotificationSubscriber */
 'use strict';
 
 /**
@@ -15,8 +16,7 @@ function MenuController ($scope, mobileMenu) {
     $scope.mobileMenu = mobileMenu;
 }
 
-angular
-    .module('Notifications', [])
+angular    .module('Notifications', [])
     .factory('mobileMenu', [ MobileMenu ])
     .factory('notificationsService', [ NotificationsService ])
     .factory('likeNotificationSubscriber', ['notificationsService', LikeNotificationSubscriber ])

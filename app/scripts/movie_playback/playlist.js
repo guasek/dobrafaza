@@ -1,5 +1,5 @@
 'use strict';
-/* global Video */
+/* global Video, VideoPreview */
 
 /**
  * Manages videos that has been played.
@@ -150,7 +150,7 @@ PlayList.prototype.previousVideoPreview = function () {
         return VideoPreview.defaultVideoPreview();
     }
     return VideoPreview.youtubeVideoPreview(videoToBePreviewed);
-}
+};
 
 /**
  * Returns next video preview.
@@ -170,7 +170,7 @@ PlayList.prototype.nextVideoPreview = function () {
         }
     }
     return null;
-}
+};
 
 /**
  * Brings video with given id to the front of playlist.

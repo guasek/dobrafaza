@@ -24,7 +24,7 @@ function VideoPlaybackStarted(eventType, currentlyPlayedVideo, previouslyPlayedV
  */
 VideoPlaybackStarted.next = function (currentlyPlayedVideo, previouslyPlayedVideo) {
     return new VideoPlaybackStarted('nextVideoPlaybackStarted', currentlyPlayedVideo, previouslyPlayedVideo);
-}
+};
 
 /**
  * Creates previous video playback started event.
@@ -34,4 +34,4 @@ VideoPlaybackStarted.next = function (currentlyPlayedVideo, previouslyPlayedVide
  */
 VideoPlaybackStarted.previous = function (currentlyPlayedVideo, previouslyPlayedVideo) {
     return new VideoPlaybackStarted('previousVideoPlaybackStarted', currentlyPlayedVideo, previouslyPlayedVideo);
-}
+};

@@ -54,7 +54,7 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
      */
     var previousVideoPreview = function () {
         return this.playList.previousVideoPreview();
-    }
+    };
 
     /**
      * Returns next video preview.
@@ -63,7 +63,7 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
      */
     var nextVideoPreview = function () {
         return this.playList.nextVideoPreview();
-    }
+    };
 
     /**
      * Begins infinite video playback.

@@ -20,7 +20,7 @@ function VideoPreview(title, thumbnailUrl) {
  */
 VideoPreview.prototype.thumbnailUrl = function () {
     return this.thumbnail;
-}
+};
 
 /**
  * Returns video title.
@@ -29,7 +29,7 @@ VideoPreview.prototype.thumbnailUrl = function () {
  */
 VideoPreview.prototype.showTitle = function () {
     return this.title;
-}
+};
 
 /**
  * Factory method used to create video preview from youtube video.

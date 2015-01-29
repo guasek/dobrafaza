@@ -1,4 +1,4 @@
-/* global VideoPlaybackStarted, VoteCastEvent */
+/* global PreviousVideoPlaybackStarted, VoteCastEvent */
 /* exported VotingEnablingSubscriber, VotingDisablingSubscriber */
 'use strict';
 

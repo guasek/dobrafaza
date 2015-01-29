@@ -1,3 +1,4 @@
+/* exported MobileMenu */
 'use strict';
 
 /**
