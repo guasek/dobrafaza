@@ -53,7 +53,7 @@ function NotificationsService () {
         setTimeout(function () {
             notifierMieso.className = 'notifier mieso ns-hide ng-hide';
         }, 1000);
-        setTimeout(showMiesoNotification, 90000);
+        setTimeout(showMiesoNotification, 180000);
     }
 
     return {
