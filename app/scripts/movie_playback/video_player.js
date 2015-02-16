@@ -56,6 +56,7 @@ function VideoPlayer(youtubeVideoPlayer, eventPublisher) {
         return this.playList.previousVideoPreview();
     };
 
+
     /**
      * Returns next video preview.
      *

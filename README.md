@@ -15,7 +15,7 @@ Then on your own machine:
 
 edit /etc/hosts and add:
 
-192.192.1.10 vagrant.dobrafaza.pl
+192.192.1.10 vagrant.dobrafaza.com
 
 Done.
 
@@ -31,7 +31,7 @@ $ gem install knife-solo
 Then you can execute deploy script
 
 ```sh
-$ knife ssh ec2-54-200-237-88.us-west-2.compute.amazonaws.com 'sudo chef-client' -m -x ubuntu -i /home/glasek/.ssh/amazon.pem
+$ knife ssh your.aws.instance.public.ip 'sudo chef-client' -m -x ubuntu -i /path/to/amazon.pem
 ```
 
 #Bring up new node:
@@ -39,10 +39,10 @@ $ knife ssh ec2-54-200-237-88.us-west-2.compute.amazonaws.com 'sudo chef-client'
 Set up new instance of server then
 
 ```sh
-$ knife bootstrap 54.187.229.109 -x ubuntu -i /home/glasek/.ssh/amazon.pem --sudo
+$ knife bootstrap your.aws.instance.public.ip -x ubuntu -i /path/to/amazon.pem --sudo
 ```
 
-Wejść na stronę chefa i dodać do run listy cookbooki.
+Go to chef website and add cookbooks to run list then:
 ```sh
-$ knife ssh ec2-54-148-165-210.us-west-2.compute.amazonaws.com 'sudo chef-client' -m -x ubuntu -i /home/glasek/.ssh/amazon.pem
+$ knife ssh your.aws.instance.public.ip 'sudo chef-client' -m -x ubuntu -i /path/to/amazon.pem
 ```
